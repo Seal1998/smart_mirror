@@ -39,8 +39,10 @@ class Weather(Frame):
         Frame.__init__(self, parent, bg='black')
         self.wLabel = Label(self, font=('Helvetica', 48), fg="white", bg="black")
         self.wiLabel = Label(self, bg="black")
-        self.wiLabel.pack()
+        self.wsLabel = Label(self, font=('Helvetica', 48), fg="white", bg="black")
+        self.wiLabel.pack(side=LEFT)
         self.wLabel.pack()
+        self.wsLabel.pack()
         self.get_weather()
 
     def get_weather(self):
@@ -48,8 +50,10 @@ class Weather(Frame):
         res = requests.get("http://api.openweathermap.org/data/2.5/find",
                             params={'q': self.weather['city'], 'type': 'like', 'units': 'metric', 'APPID': self.weather['APPID']})
         data = res.json()
-        weather_str = '{:+.0f} {}'.format(data['list'][0]['main']['temp'], data['list'][0]['weather'][0]['description'])
-        self.wLabel.config(text = weather_str)
+        weather = ' {:+.0f} {}'.format(data['list'][0]['main']['temp'], "°C")
+        weather_description = ' {}'.format(data['list'][0]['weather'][0]['description'])
+        self.wLabel.config(text = weather)
+        self.wsLabel.config(text = weather_description)
         status = data['list'][0]['weather'][0]['main']
         if int(datetime.datetime.now().strftime('%H')) in range(7, 24) and status == 'Clear':
             StatusImg = Image.open(self.weather['day-clear'])
@@ -58,7 +62,18 @@ class Weather(Frame):
             self.wiLabel.config(image = StatusImg)
             self.wiLabel.image = StatusImg
 
-        #elif int(datetime.datetime.now().strftime('%H')) in range(7, 24) and status == 'Clear':
+        elif int(datetime.datetime.now().strftime('%H')) in range(7, 24) and status == 'Thunderstorm':
+            pass
+        elif int(datetime.datetime.now().strftime('%H')) in range(7, 24) and status == 'Drizzle':
+            pass
+        elif int(datetime.datetime.now().strftime('%H')) in range(7, 24) and status == 'Rain':
+            pass
+        elif int(datetime.datetime.now().strftime('%H')) in range(7, 24) and status == 'Snow':
+            pass
+        elif int(datetime.datetime.now().strftime('%H')) in range(7, 24) and status == 'Atmosphere':
+            pass
+        elif int(datetime.datetime.now().strftime('%H')) in range(7, 24) and status == 'Clouds':
+            pass
 
 
 root = Tk()
