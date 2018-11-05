@@ -36,6 +36,13 @@ class Weather(Frame):
         'day-clear': "weather/Sun.png",
         'evening-clear': "weather/Sunrise.png",
         'night-clear': "weather/Moon.png",
+        'thundersorm': "weather/Storm.png",
+        'drizzle': "weather/Snow.png",
+        'rain': "weather/Rain.png",
+        'snow': "weather/Snow.png",
+        'atmosphere': "weather/Wind.png",
+        'clouds-day': "weather/PartlySunny.png",
+        'clouds-night': "weather/PartlyMoon.png",
     }
     def __init__(self, parent):
         Frame.__init__(self, parent, bg='black')
@@ -79,18 +86,61 @@ class Weather(Frame):
             self.wiLabel.config(image=StatusImg)
             self.wiLabel.image = StatusImg
 
-        elif int(datetime.datetime.now().strftime('%H')) in range(7, 24) and status == 'Thunderstorm':
-            pass
-        elif int(datetime.datetime.now().strftime('%H')) in range(7, 24) and status == 'Drizzle':
-            pass
-        elif int(datetime.datetime.now().strftime('%H')) in range(7, 24) and status == 'Rain':
-            pass
-        elif int(datetime.datetime.now().strftime('%H')) in range(7, 24) and status == 'Snow':
-            pass
-        elif int(datetime.datetime.now().strftime('%H')) in range(7, 24) and status == 'Atmosphere':
-            pass
-        elif int(datetime.datetime.now().strftime('%H')) in range(7, 24) and status == 'Clouds':
-            pass
+        elif status == 'Thunderstorm':
+            StatusImg = Image.open(self.weather['thundersorm'])
+            StatusImg.thumbnail((100, 100))
+            StatusImg = ImageTk.PhotoImage(StatusImg)
+            self.wiLabel.config(image=StatusImg)
+            self.wiLabel.image = StatusImg
+
+        elif status == 'Drizzle':
+            StatusImg = Image.open(self.weather['drizzle'])
+            StatusImg.thumbnail((100, 100))
+            StatusImg = ImageTk.PhotoImage(StatusImg)
+            self.wiLabel.config(image=StatusImg)
+            self.wiLabel.image = StatusImg
+
+        elif status == 'Rain':
+            StatusImg = Image.open(self.weather['rain'])
+            StatusImg.thumbnail((100, 100))
+            StatusImg = ImageTk.PhotoImage(StatusImg)
+            self.wiLabel.config(image=StatusImg)
+            self.wiLabel.image = StatusImg
+
+        elif status == 'Snow':
+            StatusImg = Image.open(self.weather['snow'])
+            StatusImg.thumbnail((100, 100))
+            StatusImg = ImageTk.PhotoImage(StatusImg)
+            self.wiLabel.config(image=StatusImg)
+            self.wiLabel.image = StatusImg
+
+        elif status == 'Atmosphere':
+            StatusImg = Image.open(self.weather['atmosphere'])
+            StatusImg.thumbnail((100, 100))
+            StatusImg = ImageTk.PhotoImage(StatusImg)
+            self.wiLabel.config(image=StatusImg)
+            self.wiLabel.image = StatusImg
+
+        elif hour in range(7, 19) and status == 'Clouds':
+            StatusImg = Image.open(self.weather['clouds-day'])
+            StatusImg.thumbnail((100, 100))
+            StatusImg = ImageTk.PhotoImage(StatusImg)
+            self.wiLabel.config(image=StatusImg)
+            self.wiLabel.image = StatusImg
+
+        elif hour in range(19, 24) and status == 'Clouds':
+            StatusImg = Image.open(self.weather['clouds-night'])
+            StatusImg.thumbnail((100, 100))
+            StatusImg = ImageTk.PhotoImage(StatusImg)
+            self.wiLabel.config(image=StatusImg)
+            self.wiLabel.image = StatusImg
+
+        elif hour in range(0, 7) and status == 'Clouds':
+            StatusImg = Image.open(self.weather['clouds-night'])
+            StatusImg.thumbnail((100, 100))
+            StatusImg = ImageTk.PhotoImage(StatusImg)
+            self.wiLabel.config(image=StatusImg)
+            self.wiLabel.image = StatusImg
 
 
 root = Tk()
