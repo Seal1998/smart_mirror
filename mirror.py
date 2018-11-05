@@ -34,6 +34,8 @@ class Weather(Frame):
         'city': 'Kharkiv',
         'APPID': 'dbdaef6ff380721afe343cf0543f9e82',
         'day-clear': "weather/Sun.png",
+        'evening-clear': "weather/Sunrise.png",
+        'night-clear': "weather/Moon.png",
     }
     def __init__(self, parent):
         Frame.__init__(self, parent, bg='black')
@@ -55,11 +57,26 @@ class Weather(Frame):
         self.wLabel.config(text = weather)
         self.wsLabel.config(text = weather_description)
         status = data['list'][0]['weather'][0]['main']
-        if int(datetime.datetime.now().strftime('%H')) in range(7, 24) and status == 'Clear':
+        hour = int(datetime.datetime.now().strftime('%H'))
+        if hour in range(7, 18) and status == 'Clear':
             StatusImg = Image.open(self.weather['day-clear'])
             StatusImg.thumbnail((100, 100))
             StatusImg = ImageTk.PhotoImage(StatusImg)
             self.wiLabel.config(image = StatusImg)
+            self.wiLabel.image = StatusImg
+
+        elif hour in range(18, 24) and status == 'Clear':
+            StatusImg = Image.open(self.weather['evening-clear'])
+            StatusImg.thumbnail((100, 100))
+            StatusImg = ImageTk.PhotoImage(StatusImg)
+            self.wiLabel.config(image = StatusImg)
+            self.wiLabel.image = StatusImg
+
+        elif hour in range(0, 7) and status == 'Clear':
+            StatusImg = Image.open(self.weather['night-clear'])
+            StatusImg.thumbnail((100, 100))
+            StatusImg = ImageTk.PhotoImage(StatusImg)
+            self.wiLabel.config(image=StatusImg)
             self.wiLabel.image = StatusImg
 
         elif int(datetime.datetime.now().strftime('%H')) in range(7, 24) and status == 'Thunderstorm':
