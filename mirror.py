@@ -130,6 +130,7 @@ class Weather(Frame):
         status = data['list'][0]['weather'][0]['main']
         hour = int(datetime.datetime.now().strftime('%H'))
 
+        # устанавливаем иконку соотвествующей погоды
         statusImg = Image.open(self.pickImageNameFromStatus(hour, status))
         statusImg.thumbnail((100, 100))
         statusImg = ImageTk.PhotoImage(statusImg)
