@@ -128,6 +128,8 @@ class Weather(Frame):
         self.weatherImageLabel.config(image=statusImg)
         self.weatherImageLabel.image = statusImg
 
+        self.weatherImageLabel.after(36*(pow(10, 5)), self.get_weather)
+
 
 root = Tk()
 frame = Frame(bg='black')
