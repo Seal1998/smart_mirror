@@ -41,20 +41,40 @@ class Clock(Frame):
 
 
 class Weather(Frame):
-    weather = {
+    weather_config = {
         'city': 'Kharkiv',
         'APPID': 'dbdaef6ff380721afe343cf0543f9e82',
-        'day-clear': "weather/Sun.png",
-        'evening-clear': "weather/Sunrise.png",
-        'night-clear': "weather/Moon.png",
-        'thunderstorm': "weather/Storm.png",
-        'drizzle': "weather/Snow.png",
-        'rain': "weather/Rain.png",
-        'snow': "weather/Snow.png",
-        'atmosphere': "weather/Wind.png",
-        'clouds-day': "weather/PartlySunny.png",
-        'clouds-night': "weather/PartlyMoon.png",
     }
+#словарь дневных изображений
+    weather_day_images = {
+        'thunderstorm': 'weather/Storm.png',
+        'drizzle': 'weather/Snow.png',
+        'rain': 'weather/Rain.png',
+        'snow': 'weather/Snow.png',
+        'atmosphere': 'weather/Haze.png',
+        'clear': 'weather/Sun.png',
+        'clouds': 'weather/PartlySunny.png',
+    }
+#словарь ночных изображений
+    weather_night_images = {
+        'thunderstorm': 'weather/Storm.png',
+        'drizzle': 'weather/Snow.png',
+        'rain': 'weather/Rain.png',
+        'snow': 'weather/Snow.png',
+        'atmosphere': 'weather/Haze.png',
+        'clear': 'weather/Moon.png',
+        'clouds': 'weather/PartlyMoon.png',
+    }
+#словарь типов погоды
+    weather_id = {
+        'thunderstorm': {200, 201, 202, 210, 211, 212, 221, 230, 231, 232},
+        'drizzle': {300, 301, 302, 310, 311, 312, 313, 314, 321},
+        'rain': {500, 501, 502, 503, 504, 511, 520, 521, 522, 531},
+        'snow': {600, 601, 602, 611, 612, 615, 616, 620, 621, 622},
+        'atmosphere': {701, 711, 721, 731, 741, 751, 761, 762, 771, 781},
+        'clear': {800, },
+        'clouds': {801, 802, 803, 804},
+                }
 
     def __init__(self, parent):
         Frame.__init__(self, parent, bg='black')
@@ -62,76 +82,47 @@ class Weather(Frame):
         # настраиваем лейблы с погодой
         self.weatherLabel = Label(self, font=('Helvetica', 48), fg="white", bg="black")
         self.weatherImageLabel = Label(self, bg="black")
-        self.weatherStatusLabel = Label(self, font=('Helvetica', 48), fg="white", bg="black")
+        self.weatherDescriptionLabel = Label(self, font=('Helvetica', 48), fg="white", bg="black")
 
         # распологаем лейблы с погодой на экране
         self.weatherImageLabel.pack(side=LEFT)
         self.weatherLabel.pack()
-        self.weatherStatusLabel.pack()
+        self.weatherDescriptionLabel.pack()
 
         # обновляем погоду на лейблах
         self.get_weather()
 
 
-    def pickImageNameFromStatus(self, hour, status):
-
-        if hour in range(7, 18) and status == 'Clear':
-            return self.weather['day-clear']
-
-        elif hour in range(18, 24) and status == 'Clear':
-            return self.weather['evening-clear']
-
-        elif hour in range(0, 7) and status == 'Clear':
-            return self.weather['night-clear']
-
-        elif status == 'Thunderstorm':
-            return self.weather['thunderstorm']
-
-        elif status == 'Drizzle':
-            return self.weather['drizzle']
-
-        elif status == 'Rain':
-            return self.weather['rain']
-
-        elif status == 'Snow':
-            return self.weather['snow']
-
-        elif status == 'Atmosphere':
-            return self.weather['atmosphere']
-
-        elif hour in range(7, 19) and status == 'Clouds':
-            return self.weather['clouds-day']
-
-        elif hour in range(19, 24) and status == 'Clouds':
-            return self.weather['clouds-night']
-
-        elif hour in range(0, 7) and status == 'Clouds':
-            return self.weather['clouds-night']
-
-        else:
-            return self.weather['day-clear'] # change to "connection lost"
-
+    def pickImageNameFromId(self, hour, id):
+        for type in self.weather_id: # выбираем погодный тип из словаря типов
+            for ID in self.weather_id[type]: # выбираем идентификатор из погодного типа (id описания)
+                if id == ID: # если нашлось совпадение по id, то в зависимости от времени возвращаем изобр. в основную функцию
+                    if hour in range(6, 18):
+                        return self.weather_day_images[type]
+                    else:
+                        return self.weather_night_images[type]
 
     def get_weather(self):
 
         # получаем погоду с api.openweathermap.org
         res = requests.get("http://api.openweathermap.org/data/2.5/find",
                            params={
-                               'q': self.weather['city'],
+                               'q': self.weather_config['city'],
                                'type': 'like',
                                'units': 'metric',
-                               'APPID': self.weather['APPID']})
+                               'APPID': self.weather_config['APPID']})
         data = res.json()
 
         weather = ' {:+.0f} {}'.format(data['list'][0]['main']['temp'], "°C")
+        #weather_status = data['list'][0]['weather'][0]['main']
         weather_description = ' {}'.format(data['list'][0]['weather'][0]['description'])
+        weather_id = data['list'][0]['weather'][0]['id']
         self.weatherLabel.config(text=weather)
-        self.weatherStatusLabel.config(text=weather_description)
-        status = data['list'][0]['weather'][0]['main']
+        self.weatherDescriptionLabel.config(text=weather_description)
         hour = int(datetime.datetime.now().strftime('%H'))
 
         # устанавливаем иконку соотвествующей погоды
-        statusImg = Image.open(self.pickImageNameFromStatus(hour, status))
+        statusImg = Image.open(self.pickImageNameFromId(hour, weather_id))
         statusImg.thumbnail((100, 100))
         statusImg = ImageTk.PhotoImage(statusImg)
         self.weatherImageLabel.config(image=statusImg)
