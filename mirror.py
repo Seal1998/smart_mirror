@@ -130,12 +130,41 @@ class Weather(Frame):
 
         self.weatherImageLabel.after(36*(pow(10, 5)), self.get_weather)
 
+class ExchangeRates(Frame):
+    ex_config = {
+        'url': 'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json',
+        'currency': {'USD', 'RUB'}
+    }
+
+    def __init__(self, parent):
+        Frame.__init__(self, parent, bg='black')
+        self.currencyLabel = Label(self, font=('Helvetica', 48), fg="white", bg="black")
+        self.currencyLabel.pack()
+        self.get_rates()
+
+    def get_rates(self):
+        res = requests.get(self.ex_config['url'],)
+        data = res.json()
+
+        self.set_label(data)
+        self.after(24*36*(pow(10, 5)), self.get_rates)
+
+    def set_label(self,data):
+        rate_string = ''
+        for el in data:
+            if el['cc'] in self.ex_config['currency']:
+                rate_string = rate_string + ('{}: {:.2f}{}'.format(el['cc'], el['rate'], '\n'))
+        rate_string = rate_string[:-1]
+        self.currencyLabel.config(text=rate_string)
+
 
 root = Tk()
 frame = Frame(bg='black')
 clock = Clock(frame)
 weather = Weather(frame)
+currency = ExchangeRates(frame)
 frame.pack()
 clock.pack()
 weather.pack()
+currency.pack()
 root.mainloop()
