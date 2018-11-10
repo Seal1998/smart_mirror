@@ -72,6 +72,7 @@ class Weather(Frame):
         # обновляем погоду на лейблах
         self.get_weather()
 
+
     def pickImageNameFromStatus(self, hour, status):
 
         if hour in range(7, 18) and status == 'Clear':
@@ -109,6 +110,7 @@ class Weather(Frame):
 
         else:
             return self.weather['day-clear'] # change to "connection lost"
+
 
     def get_weather(self):
 
