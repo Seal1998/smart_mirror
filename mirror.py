@@ -3,6 +3,8 @@ from tkinter import *
 from PIL import Image, ImageTk
 import datetime, requests
 
+ONE_HOUR = 36 * (pow(10, 5))
+TWENTY_FOUR_HOURS = 24 * ONE_HOUR
 
 class Clock(Frame):
     def __init__(self, parent, *args, **kwargs):
@@ -138,7 +140,7 @@ class Weather(Frame):
         self.weatherImageLabel.image = statusImg
 
         # todo                       убрать магическую константу
-        self.weatherImageLabel.after(36*(pow(10, 5)), self.get_weather)
+        self.weatherImageLabel.after(ONE_HOUR, self.get_weather)
 
 
 class ExchangeRates(Frame):
@@ -164,7 +166,7 @@ class ExchangeRates(Frame):
         self.currencyLabel.config(text=self.extract_currency_rates(json_answer))
 
         # todo     убрать магическую константу
-        self.after(24 * 36 * (pow(10, 5)), self.update_rates)
+        self.after(TWENTY_FOUR_HOURS, self.update_rates)
 
     def extract_currency_rates(self, json_data):
         rate_string = ''
