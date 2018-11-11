@@ -61,7 +61,7 @@ class Weather(Frame):
         # обновляем погоду на лейблах
         self.get_weather()
 
-    def pickImageNameFromId(self, hour, weather_id):
+    def pick_image_name_from_id(self, hour, weather_id):
         for weather_type in self.weather_id:                  # Перебираем погодные типы из словаря типов
             for w_id in self.weather_id[weather_type]:        # Перебираем идентификаторы (id) из погодного типа
                 if w_id == weather_id:                        # Если нашлось совпадение по id, то
@@ -95,7 +95,7 @@ class Weather(Frame):
         hour = int(datetime.datetime.now().strftime('%H'))
 
         # устанавливаем иконку соотвествующей погоды
-        statusImg = Image.open(self.pickImageNameFromId(hour, weather_id))
+        statusImg = Image.open(self.pick_image_name_from_id(hour, weather_id))
         statusImg.thumbnail((100, 100))
         statusImg = ImageTk.PhotoImage(statusImg)
 

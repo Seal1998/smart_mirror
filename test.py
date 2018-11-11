@@ -7,6 +7,7 @@ except ImportError:
 
 from tkcalendar import Calendar, DateEntry
 
+
 def example1():
     def print_sel():
         print(cal.selection_get())
@@ -21,7 +22,6 @@ def example1():
 
 
 def example2():
-
     top = tk.Toplevel(root)
 
     cal = Calendar(top, selectmode='none')
