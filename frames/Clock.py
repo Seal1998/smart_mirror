@@ -36,3 +36,8 @@ class Clock(Frame):
 
         # выполняем апдейт 10 раз/секунду
         self.timeLabel.after(100, self.update)
+
+    def _update_system_time(self):
+        pass
+
+

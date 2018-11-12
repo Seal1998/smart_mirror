@@ -4,6 +4,8 @@ from tkinter import *
 import requests
 from PIL import Image, ImageTk
 
+from frames.utils import ONE_HOUR_MS
+
 
 class Weather(Frame):
     weather_config = {
@@ -79,16 +81,16 @@ class Weather(Frame):
                                'type': 'like',
                                'units': 'metric',
                                'APPID': self.weather_config['APPID']})
-        data = res.json()
+        json_response = res.json()
 
         # todo:    привести пример
-        weather = ' {:+.0f} {}'.format(data['list'][0]['main']['temp'], "°C")
+        weather = ' {:+.0f} {}'.format(json_response['list'][0]['main']['temp'], "°C")
 
         # weather_status = data['list'][0]['weather_icons'][0]['main']
 
-        weather_description = ' {}'.format(data['list'][0]['weather'][0]['description'])
+        weather_description = ' {}'.format(json_response['list'][0]['weather'][0]['description'])
 
-        weather_id = data['list'][0]['weather'][0]['id']
+        weather_id = json_response['list'][0]['weather'][0]['id']
 
         self.weatherLabel.config(text=weather)
         self.weatherDescriptionLabel.config(text=weather_description)
@@ -102,5 +104,4 @@ class Weather(Frame):
         self.weatherImageLabel.config(image=statusImg)
         self.weatherImageLabel.image = statusImg
 
-        # todo                       убрать магическую константу
-        self.weatherImageLabel.after(36*(pow(10, 5)), self.get_weather)
+        self.weatherImageLabel.after(ONE_HOUR_MS, self.get_weather)

@@ -1,6 +1,8 @@
 from tkinter import *
 import requests
 
+from frames.utils import ONE_HOUR_MS
+
 
 class ExchangeRates(Frame):
     ex_config = {
@@ -20,23 +22,23 @@ class ExchangeRates(Frame):
         self.update_rates()
 
     def update_rates(self):
-        json_answer = requests.get(self.ex_config['url'], ).json()
+        json_response = requests.get(self.ex_config['url'], ).json()
 
-        self.currencyLabel.config(text=self.extract_currency_rates(json_answer))
+        self.currencyLabel.config(text=self.extract_currency_rates(json_response))
 
-        # todo     убрать магическую константу
-        self.after(24 * 36 * (pow(10, 5)), self.update_rates)
+        self.after(ONE_HOUR_MS, self.update_rates)
 
     def extract_currency_rates(self, json_data):
-        rate_string = ''
+        rates_string = ''
 
         for element in json_data:
             if element['cc'] in self.ex_config['currency']:
 
-                # todo                       привести пример
-                rate_string += ('{}: {:.2f}{}'.format(element['cc'], element['rate'], ' UAH\n'))
+                # например      'USD: 27.87 UAH
+                #               'RUB: 0.42 UAH
+                rates_string += ('{}: {:.2f}{}'.format(element['cc'], element['rate'], ' UAH\n'))
 
         # убираем лишний перенос строки
-        rate_string = rate_string[:-1]
+        rates_string = rates_string[:-1]
 
-        return rate_string
+        return rates_string
