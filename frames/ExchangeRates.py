@@ -1,6 +1,7 @@
 from tkinter import *
 import requests
 
+from .utils import TimeConstant
 
 class ExchangeRates(Frame):
     ex_config = {
@@ -24,8 +25,7 @@ class ExchangeRates(Frame):
 
         self.currencyLabel.config(text=self.extract_currency_rates(json_answer))
 
-        # todo     убрать магическую константу
-        self.after(24 * 36 * (pow(10, 5)), self.update_rates)
+        self.after(TimeConstant.DAY, self.update_rates)
 
     def extract_currency_rates(self, json_data):
         rate_string = ''

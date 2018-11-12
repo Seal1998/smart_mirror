@@ -4,6 +4,7 @@ from tkinter import *
 import requests
 from PIL import Image, ImageTk
 
+from .utils import TimeConstant
 
 class Weather(Frame):
     weather_config = {
@@ -102,5 +103,4 @@ class Weather(Frame):
         self.weatherImageLabel.config(image=statusImg)
         self.weatherImageLabel.image = statusImg
 
-        # todo                       убрать магическую константу
-        self.weatherImageLabel.after(36*(pow(10, 5)), self.get_weather)
+        self.weatherImageLabel.after(TimeConstant.ONE_HOUR, self.get_weather)
