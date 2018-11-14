@@ -1,7 +1,7 @@
 from tkinter import *
 import requests
 
-from frames.utils import ONE_HOUR_MS
+from .utils import TimeConstant
 
 
 class ExchangeRates(Frame):
@@ -26,7 +26,7 @@ class ExchangeRates(Frame):
 
         self.currencyLabel.config(text=self.extract_currency_rates(json_response))
 
-        self.after(ONE_HOUR_MS, self.update_rates)
+        self.after(TimeConstant.DAY, self.update_rates)
 
     def extract_currency_rates(self, json_data):
         rates_string = ''

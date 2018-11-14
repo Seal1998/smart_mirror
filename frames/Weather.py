@@ -4,7 +4,7 @@ from tkinter import *
 import requests
 from PIL import Image, ImageTk
 
-from frames.utils import ONE_HOUR_MS
+from .utils import TimeConstant
 
 
 class Weather(Frame):
@@ -104,4 +104,4 @@ class Weather(Frame):
         self.weatherImageLabel.config(image=statusImg)
         self.weatherImageLabel.image = statusImg
 
-        self.weatherImageLabel.after(ONE_HOUR_MS, self.get_weather)
+        self.weatherImageLabel.after(TimeConstant.ONE_HOUR, self.get_weather)
