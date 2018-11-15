@@ -36,7 +36,7 @@ class Fullscreen():
     def activate_fullscreen(self, event=None):
         self.window.attributes("-fullscreen", True)
 
-    def diactivate_fullscreen(self, event=None):
+    def deactivate_fullscreen(self, event=None):
         self.window.attributes("-fullscreen", False)
 
 app = Fullscreen()
