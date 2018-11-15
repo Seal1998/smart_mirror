@@ -1,4 +1,9 @@
 <BasicWidget>:
+    text: "BasicWidget"
     margin: 5
-    Label:
-        text: "Basic widget"
+    canvas.before:
+        Color:
+            rgba: .5, .5, .5, 1
+        Line:
+            width: 1
+            rectangle: (self.x + self.margin), (self.y + self.margin), (self.width - self.margin), (self.height - self.margin)
