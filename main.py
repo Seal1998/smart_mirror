@@ -3,13 +3,41 @@ from frames.Clock import Clock
 from frames.ExchangeRates import ExchangeRates
 from frames.Weather import Weather
 
-root = Tk()
-frame = Frame(bg='black')
-clock = Clock(frame)
-weather = Weather(frame)
-currency = ExchangeRates(frame)
-frame.pack()
-clock.pack()
-weather.pack()
-currency.pack()
-root.mainloop()
+class Fullscreen():
+    def __init__(self):
+        self.window = Tk()
+        self.window.configure(background="black")
+
+        self.topFrame = Frame(self.window)
+        self.topLeftFrame = Frame(self.topFrame, background="black")
+        self.topRightFrame = Frame(self.topFrame, background="black")
+
+        self.bottomFrame = Frame(self.window, background="black")
+
+        self.topFrame.pack(side=TOP, pady=(50,0))
+        self.topLeftFrame.pack(side=LEFT, padx=(0, 400))
+        self.topRightFrame.pack(side=RIGHT, anchor=N,  padx=(400, 0))
+        self.topFrame.config(background="black")
+
+        self.bottomFrame.pack(side=BOTTOM)
+
+        self.clockFrame = Clock(self.topLeftFrame)
+        self.clockFrame.pack(pady=(0, 100))
+
+        self.ExchangeRatesFrame = ExchangeRates(self.topLeftFrame)
+        self.ExchangeRatesFrame.pack(pady=(0, 100))
+
+        self.weatherFrame = Weather(self.topRightFrame)
+        self.weatherFrame.pack()
+
+        self.window.bind("<z>", self.activate_fullscreen)
+        self.window.bind("<x>", self.diactivate_fullscreen)
+
+    def activate_fullscreen(self, event=None):
+        self.window.attributes("-fullscreen", True)
+
+    def diactivate_fullscreen(self, event=None):
+        self.window.attributes("-fullscreen", False)
+
+app = Fullscreen()
+app.window.mainloop()
