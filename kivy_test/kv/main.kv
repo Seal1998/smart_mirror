@@ -1,0 +1,58 @@
+#:import clock kivy_frames.clock.Clock
+
+<Lab@Label>:
+    margin: 5
+    canvas.before:
+        Color:
+            rgba: .5, .5, .5, 1
+        Line:
+            width: 1
+            rectangle: (self.x + self.margin), (self.y + self.margin), (self.width - self.margin), (self.height - self.margin)
+
+<Root>:
+    rows: 1
+    BoxLayout:
+        orientation: "vertical"
+
+        BoxLayout:
+            orientation: "horizontal"
+
+            BoxLayout:
+                orientation: "vertical"
+
+                #Clock:
+
+                Lab:
+                    text: "Clock"
+
+                Lab:
+                    text: "Weather"
+
+            BoxLayout:
+                orientation: "vertical"
+
+                Lab:
+                    text: "Date/Calendar"
+
+                Lab:
+                    text: "Events"
+
+        BoxLayout:
+            orientation: "horizontal"
+
+            BoxLayout:
+                orientation: "vertical"
+
+                Lab:
+                    text: "Currents"
+
+                Lab:
+                    text: "News"
+
+            BoxLayout:
+                orientation: "vertical"
+
+                Lab:
+                    text: "Mail"
+
+

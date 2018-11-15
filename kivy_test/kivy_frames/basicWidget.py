@@ -1,0 +1,2 @@
+class BasicWidget:
+    pass
