@@ -9,11 +9,13 @@ class Clock(Frame):
 
         # инициализация лейбла со временем
         self.formattedTime = ''
+
         self.timeLabel = Label(self, font=('Helvetica', 64), fg="white", bg="black")
         self.timeLabel.pack()
 
         # инициализация лейбла с датой
         self.formattedDate = ''
+
         self.dateLabel = Label(self, font=('Helvetica', 48), fg="white", bg="black")
         self.dateLabel.pack()
 

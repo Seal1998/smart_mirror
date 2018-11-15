@@ -26,7 +26,7 @@ class ExchangeRates(Frame):
 
         self.currencyLabel.config(text=self.extract_currency_rates(json_response))
 
-        self.after(TimeConstant.DAY, self.update_rates)
+        self.after(TimeConstant.ONE_HOUR, self.update_rates)
 
     def extract_currency_rates(self, json_data):
         rates_string = ''
