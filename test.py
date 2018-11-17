@@ -11,7 +11,8 @@ class AccessPoint():
                  wpa_passphrase = '11111111',
                  wpa_key_mgmt = 'WPA-PSK',
                  wpa_pairwise = 'CCMP',
-                 macaddr_acl = '0'):
+                 macaddr_acl = '0',
+                 gateway = '192.168.0.1',):
         self.interface = interface
         self.driver = driver
         self.ssid = ssid
@@ -22,6 +23,7 @@ class AccessPoint():
         self.wpa_key_mgmt = wpa_key_mgmt
         self.wpa_pairwise = wpa_pairwise
         self.macaddr_acl = macaddr_acl
+        self.gateway = gateway
 
         self.confname = 'hostapd.conf'
         self.create_hostapd_conf()
@@ -52,22 +54,42 @@ class AccessPoint():
 
     def _execute(self, command):
         output = subprocess.Popen(command, shell=True)
-        output.wait()
-        output.communicate()
+        #output.wait()
+        return output.communicate()
 
     def start(self):
-        try:
-            self._execute('killall wpa_supplicant')
-            self._execute('sleep 5')
-            self._execute('hostapd -B {}'.format(self.confname))
-        except:
-            print('Error')
+        self._execute('killall wpa_supplicant')
+        self.start_dhcp_server()
+        self.reload_interface()
+        self.static_srv_addr('add')
+        self._execute('hostapd -B {}'.format(self.confname))
+
+    def static_srv_addr(self, mode):
+        self._execute('ip addr {} {}/24 dev {}'.format(mode, self.gateway, self.interface))
+
+    def start_dhcp_server(self):
+        self._execute('systemctl stop dnsmasq')
+        self._execute('systemctl start dnsmasq')
+        #self._execute('ip addr add {}/24 dev {}'.format(self.gateway, self.interface))
 
     def stop(self):
         self._execute('killall hostapd')
+        self._execute('killall dnsmasq')
+        self.static_srv_addr('del')
         self._execute('systemctl start wpa_supplicant')
 
-point = AccessPoint(ssid='FREE_DRUGS', wpa_passphrase='shittymirror225', interface='wlp3s0')
+    def reload_interface(self):
+        self._execute('ifconfig {} down'.format(self.interface))
+        self._execute('ifconfig {} up'.format(self.interface))
+
+point = AccessPoint(ssid='SMIRROR', wpa_passphrase='shittymirror225', interface='wlp0s20u1', driver='rtl871xdrv')
 
 #point.start()
-point.stop()
+#point.stop()
+
+while 1:
+    ch = input('(1) ON\n(2) OFF\n')
+    if ch == '1':
+        point.start()
+    else:
+        point.stop()
