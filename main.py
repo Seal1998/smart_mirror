@@ -31,7 +31,7 @@ class Fullscreen():
         self.weatherFrame.pack()
 
         self.window.bind("<z>", self.activate_fullscreen)
-        self.window.bind("<x>", self.diactivate_fullscreen)
+        self.window.bind("<x>", self.deactivate_fullscreen)
 
     def activate_fullscreen(self, event=None):
         self.window.attributes("-fullscreen", True)
