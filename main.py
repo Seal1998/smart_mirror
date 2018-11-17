@@ -7,6 +7,7 @@ class Fullscreen():
     def __init__(self):
         self.window = Tk()
         self.window.configure(background="black")
+        self.window.config(cursor='none')
 
         self.topFrame = Frame(self.window)
         self.topLeftFrame = Frame(self.topFrame, background="black")
