@@ -33,6 +33,7 @@ class Fullscreen():
 
         self.window.bind("<z>", self.activate_fullscreen)
         self.window.bind("<x>", self.deactivate_fullscreen)
+        self.activate_fullscreen()
 
     def activate_fullscreen(self, event=None):
         self.window.attributes("-fullscreen", True)
