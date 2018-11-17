@@ -1,7 +1,7 @@
 from tkinter import *
-from frames.Clock import Clock
-from frames.ExchangeRates import ExchangeRates
-from frames.Weather import Weather
+from app.frames.Clock import Clock
+from app.frames.ExchangeRates import ExchangeRates
+from app.frames.Weather import Weather
 
 class Fullscreen():
     def __init__(self):
