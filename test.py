@@ -59,7 +59,7 @@ class AccessPoint():
 
     def start(self):
         self._execute('killall wpa_supplicant')
-        self.start_dhcp_server()
+        self.start_dnsmasq_server()
         self.reload_interface()
         self.static_srv_addr('add')
         self._execute('hostapd -B {}'.format(self.confname))
@@ -67,10 +67,25 @@ class AccessPoint():
     def static_srv_addr(self, mode):
         self._execute('ip addr {} {}/24 dev {}'.format(mode, self.gateway, self.interface))
 
-    def start_dhcp_server(self):
+    def start_dnsmasq_server(self):
         self._execute('systemctl stop dnsmasq')
+        self.setup_dnsmasq()
         self._execute('systemctl start dnsmasq')
         #self._execute('ip addr add {}/24 dev {}'.format(self.gateway, self.interface))
+
+    def setup_dnsmasq(self):
+        conf = open('/etc/dnsmasq.conf', 'w')
+        conf.write(
+            'interface={}\n'
+            'dhcp-range={}\n'
+            'dhcp-option={}\n'
+            'dhcp-option=3,{}'.format(
+                self.interface,
+                '192.168.0.10,192.168.0.100,24h',
+                '1,255.255.255.0',
+                self.gateway
+            )
+        )
 
     def stop(self):
         self._execute('killall hostapd')
@@ -82,7 +97,7 @@ class AccessPoint():
         self._execute('ifconfig {} down'.format(self.interface))
         self._execute('ifconfig {} up'.format(self.interface))
 
-point = AccessPoint(ssid='SMIRROR', wpa_passphrase='shittymirror225', interface='wlp0s20u1', driver='rtl871xdrv')
+point = AccessPoint(ssid='SMIRROR', wpa_passphrase='shittymirror225', interface='wlp3s0')
 
 #point.start()
 #point.stop()
