@@ -16,8 +16,8 @@ class Fullscreen():
         self.bottomFrame = Frame(self.window, background="black")
 
         self.topFrame.pack(side=TOP, pady=(50,0))
-        self.topLeftFrame.pack(side=LEFT, padx=(0, 150))
-        self.topRightFrame.pack(side=RIGHT, anchor=N,  padx=(150, 0))
+        self.topLeftFrame.pack(side=LEFT, padx=(0, 130))
+        self.topRightFrame.pack(side=RIGHT, anchor=N,  padx=(130, 0))
         self.topFrame.config(background="black")
 
         self.bottomFrame.pack(side=BOTTOM)
