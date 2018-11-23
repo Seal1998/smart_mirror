@@ -20,11 +20,7 @@ class WifiConnect():
 
     def connect(self):
         self.reload_interface()
-        self._execute('wpa_supplicant -i{} -c/home/meksvinz/Projects/smart_mirror/wpa_supplicant.conf -D{}'.format(
-            self.interface,
-            #os.getcwd() + '/' + self.confname,
-            self.driver
-        ))
+
 
     def test(self):
         self._execute('nmcli d wifi connect {} password {} iface {}'.format(self.ssid,

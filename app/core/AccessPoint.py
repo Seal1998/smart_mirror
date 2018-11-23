@@ -97,7 +97,7 @@ class AccessPoint():
         self._execute('ifconfig {} down'.format(self.interface))
         self._execute('ifconfig {} up'.format(self.interface))
 
-point = AccessPoint(ssid='SMIRROR', wpa_passphrase='shittymirror225', interface='wlp3s0')
+point = AccessPoint(ssid='LuckyUs-SMIRROR', wpa_passphrase='mirror228', interface='wlp3s0')
 
 #point.start()
 #point.stop()

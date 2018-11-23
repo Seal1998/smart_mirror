@@ -15,24 +15,24 @@ class Weather(Frame):
 
     # словарь дневных изображений
     weather_day_images = {
-        'thunderstorm': 'weather_icons/Storm.png',
-        'drizzle': 'weather_icons/Snow.png',
-        'rain': 'weather_icons/Rain.png',
-        'snow': 'weather_icons/Snow.png',
-        'atmosphere': 'weather_icons/Haze.png',
-        'clear': 'weather_icons/Sun.png',
-        'clouds': 'weather_icons/PartlySunny.png',
+        'thunderstorm': 'source/weather_icons/Storm.png',
+        'drizzle': 'source/weather_icons/Snow.png',
+        'rain': 'source/weather_icons/Rain.png',
+        'snow': 'source/weather_icons/Snow.png',
+        'atmosphere': 'source/weather_icons/Haze.png',
+        'clear': 'source/weather_icons/Sun.png',
+        'clouds': 'source/weather_icons/PartlySunny.png',
     }
 
     # словарь ночных изображений
     weather_night_images = {
-        'thunderstorm': 'weather_icons/Storm.png',
-        'drizzle': 'weather_icons/Snow.png',
-        'rain': 'weather_icons/Rain.png',
-        'snow': 'weather_icons/Snow.png',
-        'atmosphere': 'weather_icons/Haze.png',
-        'clear': 'weather_icons/Moon.png',
-        'clouds': 'weather_icons/PartlyMoon.png',
+        'thunderstorm': 'source/weather_icons/Storm.png',
+        'drizzle': 'source/weather_icons/Snow.png',
+        'rain': 'source/weather_icons/Rain.png',
+        'snow': 'source/weather_icons/Snow.png',
+        'atmosphere': 'source/weather_icons/Haze.png',
+        'clear': 'source/weather_icons/Moon.png',
+        'clouds': 'source/weather_icons/PartlyMoon.png',
     }
 
     # словарь соответствия идентификаторов погоды соответствующим картинкам
@@ -63,7 +63,9 @@ class Weather(Frame):
         # обновляем погоду на лейблах
         self.get_weather()
 
-    def pick_image_name_from_id(self, hour, weather_id):
+    def pick_image_name_from_id(self, weather_id):
+        hour = int(datetime.datetime.now().strftime('%H'))
+
         for weather_type in self.weather_id:                  # Перебираем погодные типы из словаря типов
             for w_id in self.weather_id[weather_type]:        # Перебираем идентификаторы (id) из погодного типа
                 if w_id == weather_id:                        # Если нашлось совпадение по id, то
@@ -94,10 +96,9 @@ class Weather(Frame):
 
         self.weatherLabel.config(text=weather)
         self.weatherDescriptionLabel.config(text=weather_description)
-        hour = int(datetime.datetime.now().strftime('%H'))
 
         # устанавливаем иконку соотвествующей погоды
-        statusImg = Image.open(self.pick_image_name_from_id(hour, weather_id))
+        statusImg = Image.open(self.pick_image_name_from_id(weather_id))
         statusImg.thumbnail((100, 100))
         statusImg = ImageTk.PhotoImage(statusImg)
 
