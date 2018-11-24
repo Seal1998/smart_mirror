@@ -12,8 +12,6 @@ class MainFrame():
         self.window.bind("<z>", self.activate_fullscreen)
         self.window.bind("<x>", self.deactivate_fullscreen)
 
-        self.status = Label(self.bottomFrame, font=('Helvetica', 48), fg="white", bg="black")
-
         self.topFrame = Frame(self.window)
         self.topLeftFrame = Frame(self.topFrame, background="black")
         self.topRightFrame = Frame(self.topFrame, background="black")
@@ -27,10 +25,17 @@ class MainFrame():
 
         self.bottomFrame.pack(side=BOTTOM)
 
+        self.status = Label(self.bottomFrame, font=('Helvetica', 48), fg="white", bg="black")
+        self.status.pack()
+
         if manager.has_internet_connection:
             self.setup_frames()
         else:
-            self.status_of_setup()
+            manager.set_up_connection()
+            if manager.status == 1:
+                self.status.config(text='Подключен')
+            elif manager.status == 2:
+                self.status.config(text='Нет записи в базе данных')
 
     def setup_frames(self):
 
@@ -44,12 +49,6 @@ class MainFrame():
         self.weatherFrame.pack()
 
         self.activate_fullscreen()
-
-    def status_of_setup(self):
-        self.status.config(text=manager.status)
-        self.status.after(2000, self.status_of_setup)
-
-
 
     def activate_fullscreen(self, event=None):
         self.window.attributes("-fullscreen", True)

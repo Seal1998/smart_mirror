@@ -16,6 +16,8 @@ class Database():
 
     def get_wifi_config(self):
         config = self.session.query(WifiConfig).first()
+        if config is None:
+            return 0, 0
         return config.ssid, config.password
 
 
