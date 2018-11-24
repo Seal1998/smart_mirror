@@ -1,10 +1,9 @@
 import datetime
+from config import ROOT_DIR
 from tkinter import *
-
 import requests
 from PIL import Image, ImageTk
-
-from .utils import TimeConstant
+from app.frames.utils import TimeConstant
 
 
 class Weather(Frame):
@@ -15,24 +14,24 @@ class Weather(Frame):
 
     # словарь дневных изображений
     weather_day_images = {
-        'thunderstorm': 'source/weather_icons/Storm.png',
-        'drizzle': 'source/weather_icons/Snow.png',
-        'rain': 'source/weather_icons/Rain.png',
-        'snow': 'source/weather_icons/Snow.png',
-        'atmosphere': 'source/weather_icons/Haze.png',
-        'clear': 'source/weather_icons/Sun.png',
-        'clouds': 'source/weather_icons/PartlySunny.png',
+        'thunderstorm':ROOT_DIR+ 'source/weather_icons/Storm.png',
+        'drizzle':ROOT_DIR+ 'source/weather_icons/Snow.png',
+        'rain':ROOT_DIR+ 'source/weather_icons/Rain.png',
+        'snow':ROOT_DIR+ 'source/weather_icons/Snow.png',
+        'atmosphere':ROOT_DIR+ 'source/weather_icons/Haze.png',
+        'clear':ROOT_DIR+ 'source/weather_icons/Sun.png',
+        'clouds':ROOT_DIR+ '/source/weather_icons/PartlySunny.png',
     }
 
     # словарь ночных изображений
     weather_night_images = {
-        'thunderstorm': 'source/weather_icons/Storm.png',
-        'drizzle': 'source/weather_icons/Snow.png',
-        'rain': 'source/weather_icons/Rain.png',
-        'snow': 'source/weather_icons/Snow.png',
-        'atmosphere': 'source/weather_icons/Haze.png',
-        'clear': 'source/weather_icons/Moon.png',
-        'clouds': 'source/weather_icons/PartlyMoon.png',
+        'thunderstorm':ROOT_DIR+ 'source/weather_icons/Storm.png',
+        'drizzle':ROOT_DIR+ 'source/weather_icons/Snow.png',
+        'rain':ROOT_DIR+ 'source/weather_icons/Rain.png',
+        'snow':ROOT_DIR+ 'source/weather_icons/Snow.png',
+        'atmosphere':ROOT_DIR+ 'source/weather_icons/Haze.png',
+        'clear':ROOT_DIR+ 'source/weather_icons/Moon.png',
+        'clouds':ROOT_DIR+ 'source/weather_icons/PartlyMoon.png',
     }
 
     # словарь соответствия идентификаторов погоды соответствующим картинкам

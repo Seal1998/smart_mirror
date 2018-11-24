@@ -29,7 +29,7 @@ class AccessPoint():
         self.create_hostapd_conf()
 
     def create_hostapd_conf(self):
-        conf = open('{}{}{}'.format(os.getcwd(),'/',self.confname), 'w')
+        conf = open('{}{}{}'.format(os.path.dirname(os.path.abspath(__file__)),'/',self.confname), 'w')
         conf.write('interface={}\n'
                    'driver={}\n'
                    'ssid={}\n'
@@ -62,7 +62,7 @@ class AccessPoint():
         self.start_dnsmasq_server()
         self.reload_interface()
         self.static_srv_addr('add')
-        self._execute('hostapd -B {}'.format(self.confname))
+        self._execute('hostapd -B {}'.format(os.path.dirname(os.path.abspath(__file__))+'/'+self.confname))
 
     def static_srv_addr(self, mode):
         self._execute('ip addr {} {}/24 dev {}'.format(mode, self.gateway, self.interface))
