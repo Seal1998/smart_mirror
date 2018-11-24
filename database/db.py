@@ -1,15 +1,24 @@
 from database.config import Engine, Base, Session
 from database.models.WifiConfig import WifiConfig
 from database.models.Tasks import Task
-import datetime
 
-Base.metadata.create_all(Engine)
-session = Session()
+class Database():
 
-#task = Task(name='test shit', description='12345')
-#session.add(task)
-#session.commit()
-#session.close()
+    session = Session()
 
-res = session.query(Task).first()
-print(res.name)
+    def __init__(self):
+        Base.metadata.create_all(Engine)
+
+    def add_wifi_config(self, SSID, PASS):
+        config = WifiConfig(ssid=SSID, password=PASS)
+        self.session.add(config)
+        self.session.commit()
+
+    def get_wifi_config(self):
+        config = self.session.query(WifiConfig).first()
+        return config.ssid, config.password
+
+
+db = Database()
+
+

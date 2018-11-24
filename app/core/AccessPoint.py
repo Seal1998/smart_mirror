@@ -96,15 +96,3 @@ class AccessPoint():
     def reload_interface(self):
         self._execute('ifconfig {} down'.format(self.interface))
         self._execute('ifconfig {} up'.format(self.interface))
-
-point = AccessPoint(ssid='LuckyUs-SMIRROR', wpa_passphrase='mirror228', interface='wlp3s0')
-
-#point.start()
-#point.stop()
-
-while 1:
-    ch = input('(1) ON\n(2) OFF\n')
-    if ch == '1':
-        point.start()
-    else:
-        point.stop()
