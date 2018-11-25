@@ -12,7 +12,8 @@ class Database():
     def __init__(self):
         Base.metadata.create_all(Engine)
 
-    def add_wifi_config(self, SSID, PASS):
+    def set_wifi_config(self, SSID, PASS):
+        self.session.query(WifiConfig).delete()
         config = WifiConfig(ssid=SSID, password=PASS)
         self.session.add(config)
         self.session.commit()

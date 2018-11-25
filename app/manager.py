@@ -20,7 +20,7 @@ class Manager():
     def get_connection_status(self):
         self.wifi_ssid, self.wifi_pass = db.get_wifi_config()
         if self.wifi_ssid == 0:
-            self.ap.start()
+            #self.ap.start()
             self.status = 0
             return self.status
         else:
@@ -29,5 +29,6 @@ class Manager():
             self.wifi.connect()
             #todo: если к точке не получилось подключиться, то вернёт False
             self.status = 1
+            return self.status
 
 manager = Manager()

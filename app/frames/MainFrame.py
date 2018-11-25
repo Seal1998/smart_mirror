@@ -35,6 +35,9 @@ class MainFrame():
             if status == 0:
                 self.statusLabel.config(text='Can`t get an wifi config, enabling access point mode\n\n'
                                              'SSID:{}\tPASSWORD:{}'.format(manager.ap_SSID, manager.ap_PASS))
+            elif status == 1:
+                self.setup_frames()
+
         self.activate_fullscreen()
     def setup_frames(self):
 
