@@ -2,7 +2,7 @@ import subprocess, os
 
 class AccessPoint():
     def __init__(self,
-                 interface="wlan0",
+                 interface="wlan0",#todo: Интерфейс получить из ifconfig
                  driver = 'nl80211',
                  ssid = 'MyAccessPoint',
                  hw_mode = 'g',
@@ -59,6 +59,8 @@ class AccessPoint():
 
     def start(self):
         self._execute('killall wpa_supplicant')
+        self._execute('killall hostapd')
+        self._execute('killall dnsmasq')
         self.start_dnsmasq_server()
         self.reload_interface()
         self.static_srv_addr('add')

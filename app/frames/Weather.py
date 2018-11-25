@@ -14,24 +14,24 @@ class Weather(Frame):
 
     # словарь дневных изображений
     weather_day_images = {
-        'thunderstorm':ROOT_DIR+ 'source/weather_icons/Storm.png',
-        'drizzle':ROOT_DIR+ 'source/weather_icons/Snow.png',
-        'rain':ROOT_DIR+ 'source/weather_icons/Rain.png',
-        'snow':ROOT_DIR+ 'source/weather_icons/Snow.png',
-        'atmosphere':ROOT_DIR+ 'source/weather_icons/Haze.png',
-        'clear':ROOT_DIR+ 'source/weather_icons/Sun.png',
+        'thunderstorm':ROOT_DIR+ '/source/weather_icons/Storm.png',
+        'drizzle':ROOT_DIR+ '/source/weather_icons/Snow.png',
+        'rain':ROOT_DIR+ '/source/weather_icons/Rain.png',
+        'snow':ROOT_DIR+ '/source/weather_icons/Snow.png',
+        'atmosphere':ROOT_DIR+ '/source/weather_icons/Haze.png',
+        'clear':ROOT_DIR+ '/source/weather_icons/Sun.png',
         'clouds':ROOT_DIR+ '/source/weather_icons/PartlySunny.png',
     }
 
     # словарь ночных изображений
     weather_night_images = {
-        'thunderstorm':ROOT_DIR+ 'source/weather_icons/Storm.png',
-        'drizzle':ROOT_DIR+ 'source/weather_icons/Snow.png',
-        'rain':ROOT_DIR+ 'source/weather_icons/Rain.png',
-        'snow':ROOT_DIR+ 'source/weather_icons/Snow.png',
-        'atmosphere':ROOT_DIR+ 'source/weather_icons/Haze.png',
-        'clear':ROOT_DIR+ 'source/weather_icons/Moon.png',
-        'clouds':ROOT_DIR+ 'source/weather_icons/PartlyMoon.png',
+        'thunderstorm':ROOT_DIR+ '/source/weather_icons/Storm.png',
+        'drizzle':ROOT_DIR+ '/source/weather_icons/Snow.png',
+        'rain':ROOT_DIR+ '/source/weather_icons/Rain.png',
+        'snow':ROOT_DIR+ '/source/weather_icons/Snow.png',
+        'atmosphere':ROOT_DIR+ '/source/weather_icons/Haze.png',
+        'clear':ROOT_DIR+ '/source/weather_icons/Moon.png',
+        'clouds':ROOT_DIR+ '/source/weather_icons/PartlyMoon.png',
     }
 
     # словарь соответствия идентификаторов погоды соответствующим картинкам

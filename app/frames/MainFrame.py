@@ -12,7 +12,7 @@ class MainFrame():
         self.window.bind("<z>", self.activate_fullscreen)
         self.window.bind("<x>", self.deactivate_fullscreen)
 
-        self.topFrame = Frame(self.window)
+        self.topFrame = Frame(self.window, background="black")
         self.topLeftFrame = Frame(self.topFrame, background="black")
         self.topRightFrame = Frame(self.topFrame, background="black")
 
@@ -25,18 +25,17 @@ class MainFrame():
 
         self.bottomFrame.pack(side=BOTTOM)
 
-        self.status = Label(self.bottomFrame, font=('Helvetica', 48), fg="white", bg="black")
-        self.status.pack()
+        self.statusLabel = Label(self.topFrame, font=('Helvetica', 20), fg="white", bg="black")
+        self.statusLabel.pack()
 
         if manager.has_internet_connection:
             self.setup_frames()
         else:
-            manager.set_up_connection()
-            if manager.status == 1:
-                self.status.config(text='Подключен')
-            elif manager.status == 2:
-                self.status.config(text='Нет записи в базе данных')
-
+            status = manager.get_connection_status()
+            if status == 0:
+                self.statusLabel.config(text='Can`t get an wifi config, enabling access point mode\n\n'
+                                             'SSID:{}\tPASSWORD:{}'.format(manager.ap_SSID, manager.ap_PASS))
+        self.activate_fullscreen()
     def setup_frames(self):
 
         self.clockFrame = Clock(self.topLeftFrame)
@@ -48,13 +47,9 @@ class MainFrame():
         self.weatherFrame = Weather(self.topRightFrame)
         self.weatherFrame.pack()
 
-        self.activate_fullscreen()
 
     def activate_fullscreen(self, event=None):
         self.window.attributes("-fullscreen", True)
 
     def deactivate_fullscreen(self, event=None):
         self.window.attributes("-fullscreen", False)
-
-app = MainFrame()
-app.window.mainloop()
