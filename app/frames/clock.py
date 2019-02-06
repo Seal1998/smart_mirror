@@ -3,7 +3,7 @@ import math
 from kivy.clock import Clock as Cl
 import datetime
 
-from kivy_frames.utils import BasicWidget
+from ..frames.utils import BasicWidget
 
 
 class Clock(BasicWidget):

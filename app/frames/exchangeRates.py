@@ -1,9 +1,9 @@
 from kivy.clock import Clock
 from kivy.uix.boxlayout import BoxLayout
 
-from kivy_frames.utils import BasicWidget, Currency
+from ..frames.utils import BasicWidget, Currency
 import requests
-from utils import TimeConstant
+from .utils import TimeConstant
 
 
 class ExchangeRates(BasicWidget):
@@ -17,7 +17,7 @@ class ExchangeRates(BasicWidget):
 
         Clock.schedule_once(self._post_init)
         Clock.schedule_once(self.update)
-        Clock.schedule_interval(self.update, TimeConstant.ONE_HOUR)
+        Clock.schedule_interval(self.update, TimeConstant.DAY)
 
     def _post_init(self, *args):
         for i in range(0, self.ex_config['currency'].__len__()):

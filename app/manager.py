@@ -31,4 +31,5 @@ class Manager():
             self.status = 1
             return self.status
 
+
 manager = Manager()

@@ -1,4 +1,4 @@
-from kivy_frames.utils import BasicWidget
+from ..frames.utils import BasicWidget
 
 
 class News(BasicWidget):

@@ -3,8 +3,8 @@ import datetime
 import requests
 from kivy.clock import Clock
 
-from kivy_frames.utils import BasicWidget
-from utils import TimeConstant
+from ..frames.utils import BasicWidget
+from .utils import TimeConstant
 
 
 class Weather(BasicWidget):
@@ -16,24 +16,24 @@ class Weather(BasicWidget):
 
     # словарь дневных изображений
     weather_day_images = {
-        'thunderstorm': 'weather_icons/Storm.png',
-        'drizzle': 'weather_icons/Snow.png',
-        'rain': 'weather_icons/Rain.png',
-        'snow': 'weather_icons/Snow.png',
-        'atmosphere': 'weather_icons/Haze.png',
-        'clear': 'weather_icons/Sun.png',
-        'clouds': 'weather_icons/PartlySunny.png',
+        'thunderstorm': 'source/weather_icons/Storm.png',
+        'drizzle': 'source/weather_icons/Snow.png',
+        'rain': 'source/weather_icons/Rain.png',
+        'snow': 'source/weather_icons/Snow.png',
+        'atmosphere': 'source/weather_icons/Haze.png',
+        'clear': 'source/weather_icons/Sun.png',
+        'clouds': 'source/weather_icons/PartlySunny.png',
     }
 
     # словарь ночных изображений
     weather_night_images = {
-        'thunderstorm': 'weather_icons/Storm.png',
-        'drizzle': 'weather_icons/Snow.png',
-        'rain': 'weather_icons/Rain.png',
-        'snow': 'weather_icons/Snow.png',
-        'atmosphere': 'weather_icons/Haze.png',
-        'clear': 'weather_icons/Moon.png',
-        'clouds': 'weather_icons/PartlyMoon.png',
+        'thunderstorm': 'source/weather_icons/Storm.png',
+        'drizzle': 'source/weather_icons/Snow.png',
+        'rain': 'source/weather_icons/Rain.png',
+        'snow': 'source/weather_icons/Snow.png',
+        'atmosphere': 'source/weather_icons/Haze.png',
+        'clear': 'source/weather_icons/Moon.png',
+        'clouds': 'source/weather_icons/PartlyMoon.png',
     }
 
     # словарь соответствия идентификаторов погоды соответствующим картинкам

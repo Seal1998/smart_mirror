@@ -7,13 +7,17 @@
         Color:
             rgba: 1, 1, 1, .1
         Rectangle:
-            pos: ((self.x + self.margin), (self.y + self.margin))
-            size: ((self.width - 2*self.margin), (self.height - 2*self.margin))
+            #pos: ((self.x + self.margin), (self.y + self.margin))
+            #size: ((self.width - 2*self.margin), (self.height - 2*self.margin))
+
+            pos: self.pos
+            size: self.size
+
     # \DEBUG
 
 <MonoLabel@Label>
-    font_name: "./fonts/neoletters.ttf"
-    font_size: self.height*.7
+    font_name: "./app/frames/fonts/neoletters/neoletters.ttf"
+    #font_size: self.height*.7
 
 <MonoAdaptiveLabel@MonoLabel>
 

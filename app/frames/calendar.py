@@ -1,6 +1,6 @@
 import datetime
 
-from kivy_frames.utils import BasicWidget
+from ..frames.utils import BasicWidget
 from kivy.clock import Clock
 
 
@@ -11,7 +11,6 @@ class Calendar(BasicWidget):
 
         Clock.schedule_once(self.update)
         Clock.schedule_interval(self.update, 0.25)
-
 
     def update(self, *args):
         #                                      например, "08 Nov"
