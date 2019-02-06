@@ -22,6 +22,7 @@ class Root(GridLayout):
 class MainApp(App):
     def build(self):
         self.title = 'SmartMirror'
+        root = self.root
         return Root()
 
     def on_start(self):

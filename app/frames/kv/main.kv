@@ -4,37 +4,36 @@
     rows: 1
 
     BoxLayout:
-        orientation: "horizontal"
+        orientation: "vertical"
+
+        Clock:
+            size_hint_y: 0.35
 
         BoxLayout:
-            orientation: "vertical"
+            #date, weather, exchange rates
+
+            orientation: "horizontal"
 
             BoxLayout:
                 orientation: "vertical"
 
-                Clock:
+                Calendar:
 
                 Weather:
+
+                BoxLayout:
+                    #filler
+
+            BoxLayout:
+                #filler
+                #:import App kivy.app.App
+                size_x: root.size[0]/2
 
             BoxLayout:
                 orientation: "vertical"
 
                 ExchangeRates:
+                    size_hint_y: 0.35
 
-                News:
-
-        BoxLayout:
-            orientation: "vertical"
-
-            BoxLayout:
-                orientation: "vertical"
-
-
-                Calendar:
-
-                Events:
-
-            BoxLayout:
-                orientation: "vertical"
-
-                Mail:
+                BoxLayout:
+                    #filler
