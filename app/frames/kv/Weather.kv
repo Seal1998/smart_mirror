@@ -1,0 +1,25 @@
+<Weather>:
+    orientation: "vertical"
+
+    BoxLayout:
+        #size_hint: (1, None)
+        orientation: "horizontal"
+
+        BoxLayout:
+            #size_hint: (.2, None)
+            Image:
+                size_hint: (1, .9)
+                id: weatherImage
+                source: "weather_icons/tornado.png"
+
+        MonoAdaptiveLabel:
+            size_hint: (1, 1)
+            id: weatherTemperature
+            font_size: self.height/2
+            text: '+666°C'
+
+    MonoAdaptiveLabel:
+
+        size_hint: (1, 0.5)
+        id: weatherStatus
+        text: 'debug'

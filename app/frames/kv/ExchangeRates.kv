@@ -1,0 +1,24 @@
+<CurrencyLabel@MonoAdaptiveLabel>:
+    font_size: self.height - self.height/2
+
+<Currency>:
+    orientation: "horizontal"
+
+    CurrencyLabel:
+        size_hint: (.7, 1)
+        text: "DBG: "
+
+    CurrencyLabel:
+        text: "debug"
+
+<ExchangeRates>:
+
+    orientation: "vertical"
+
+    #CurrencyLabel:
+    #    id: currency
+    #    text: "UAH:"
+
+    BoxLayout:
+        orientation: "vertical"
+        id: currencies
