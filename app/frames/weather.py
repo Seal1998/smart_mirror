@@ -22,6 +22,7 @@ Builder.load_string(
 
         BoxLayout:
             id: image
+            
 
         MonoLabel:
             size_hint: (1, 1)
