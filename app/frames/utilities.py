@@ -24,7 +24,6 @@ Builder.load_string('''
 
 <MonoLabel@Label>
     font_name: "./app/frames/fonts/digital-7/digital-7 (mono).ttf"
-    # font_size: BIG                             # todo proper import
 
 <MonoAdaptiveLabel@MonoLabel>
 
@@ -94,11 +93,11 @@ class TimeConstant:
 
 
 class FontSize:
-    HUGE    = int(Config.get('graphics', 'height')) / 10
-    BIG     = int(Config.get('graphics', 'height')) / 12
-    MEDIUM  = int(Config.get('graphics', 'height')) / 14
-    SMALL   = int(Config.get('graphics', 'height')) / 16
-    TINY    = int(Config.get('graphics', 'height')) / 18
+    HUGE    = int(Config.get('graphics', 'height')) / 5
+    BIG     = int(Config.get('graphics', 'height')) / 10
+    MEDIUM  = int(Config.get('graphics', 'height')) / 20
+    SMALL   = int(Config.get('graphics', 'height')) / 35
+    TINY    = int(Config.get('graphics', 'height')) / 70
 
 
 

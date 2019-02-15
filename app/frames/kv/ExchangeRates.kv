@@ -1,23 +1,23 @@
-<CurrencyLabel@MonoAdaptiveLabel>:
-    font_size: self.height - self.height/2
+#: import fs app.frames.utilities.FontSize
 
 <Currency>:
     orientation: "horizontal"
 
-    name: "currency debug"
-
-    CurrencyLabel:
+    MonoLabel:
         size_hint: (.7, 1)
+        font_size: fs.MEDIUM
         text: "DBG: "
 
-    CurrencyLabel:
+    MonoLabel:
+        font_size: fs.MEDIUM
         text: "debug"
 
 <ExchangeRates>:
 
     orientation: "vertical"
 
-    CurrencyLabel:
+    MonoLabel:
+        font_size: fs.BIG
         id: currency
         text: "UAH:"
 

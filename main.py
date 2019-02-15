@@ -1,4 +1,5 @@
 from kivy import Config
+Config.set('modules', 'inspector', '')
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
@@ -52,6 +53,7 @@ if __name__ == "__main__":
     resolution = [int(s) for s in re.findall(r"\d+", output)]           #[800, 600]
     '''
 
+
     from kivy.core.window import Window
     # Window.fullscreen = True
     Window.fullscreen = False
@@ -60,14 +62,12 @@ if __name__ == "__main__":
 
 
 
-    #'''
     from os import listdir
     kv_path = './app/frames/kv/'
     for kv in listdir(kv_path):
         if(kv == "__pycache__"):
             continue
         Builder.load_file(kv_path + kv)
-    #'''
 
     app = MainApp()
     app.run()

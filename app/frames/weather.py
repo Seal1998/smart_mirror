@@ -7,10 +7,12 @@ from kivy.properties import StringProperty, ReferenceListProperty, NumericProper
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.image import Image
 
-from .utilities import TimeConstant, MonoAdaptiveLabel
+from .utilities import TimeConstant, MonoAdaptiveLabel, SvgImage
 
 Builder.load_string(
 '''
+#: import fs app.frames.utilities.FontSize
+
 <Weather>:
     orientation: "vertical"
 
@@ -19,21 +21,16 @@ Builder.load_string(
         orientation: "horizontal"
 
         BoxLayout:
-            id: weatherImage
-            #:import SvgImage app.frames.utilities.SvgImage
-            SvgImage:
-                size_hint: (1, .9)
-                id: 'image'
-                source: ''
+            id: image
 
-        MonoAdaptiveLabel:
+        MonoLabel:
             size_hint: (1, 1)
             id: weatherTemperature
-            font_size: self.height/2
+            font_size: fs.MEDIUM
             text: '+666°C'
 
-    MonoAdaptiveLabel:
-
+    MonoLabel:
+        font_size: fs.MEDIUM
         size_hint: (1, 0.5)
         id: weatherStatus
         text: 'debug'
@@ -115,12 +112,12 @@ class Weather(BoxLayout):
         self.add_widget(statusLabel)
         '''
 
-        '''
-        self.ids.weatherImage.add_widget(Image(
+        self.image = SvgImage(
                                 size_hint = (1, .9),
-                                id        = 'image',
-                                source    = ''))
-        '''
+                                #id        = 'image',
+                                source    = '')
+        self.ids.image.add_widget(self.image)
+
 
         # todo добавить динамический выбор виджета для иконки в зависимости от формата изображения
 
@@ -166,7 +163,7 @@ class Weather(BoxLayout):
 
         hour = int(datetime.datetime.now().strftime('%H'))
 
-        #self.ids['image'].source = self.pick_image_name_from_id(hour, weather_id)
+        self.image.source = self.pick_image_name_from_id(hour, weather_id)
         self.ids['weatherTemperature'].text = weather
         self.ids['weatherStatus'].text = weather_description
 

@@ -1,3 +1,8 @@
+#: import fs app.frames.utilities.FontSize
+
+<ClockLabel@MonoLabel>
+    font_size: fs.HUGE
+
 <Clock>:
 
     AnchorLayout:
@@ -9,32 +14,32 @@
         BoxLayout:
             size_hint_x: .6
 
-            MonoAdaptiveLabel:
+            ClockLabel:
                 id: clock0hours
 
                 text: "HH"
                 font_size: self.height
 
-            MonoAdaptiveLabel:
+            ClockLabel:
                 id: clock0column1
 
                 text: ":"
                 font_size: self.height
 
-            MonoAdaptiveLabel:
+            ClockLabel:
                 id: clock0minutes
 
                 text: "MM"
                 font_size: self.height
 
-            MonoAdaptiveLabel:
+            ClockLabel:
                 id: clock0column2
 
                 text: ":"
                 font_size: self.height
 
 
-            MonoAdaptiveLabel:
+            ClockLabel:
                 id: clock0seconds
 
                 text: "SS"
