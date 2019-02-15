@@ -1,9 +1,9 @@
 from kivy.clock import Clock
 from kivy.uix.boxlayout import BoxLayout
 
-from ..frames.utils import Currency
+from ..frames.utilities import Currency
 import requests
-from .utils import TimeConstant
+from .utilities import TimeConstant
 
 
 class ExchangeRates(BoxLayout):

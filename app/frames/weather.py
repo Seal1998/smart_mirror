@@ -3,10 +3,42 @@ import datetime
 import requests
 from kivy.clock import Clock
 from kivy.lang import Builder
+from kivy.properties import StringProperty, ReferenceListProperty, NumericProperty
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.image import Image
 
-from .utils import TimeConstant
+from .utilities import TimeConstant, MonoAdaptiveLabel
 
+Builder.load_string(
+'''
+<Weather>:
+    orientation: "vertical"
+
+    BoxLayout:
+        #size_hint: (1, None)
+        orientation: "horizontal"
+
+        BoxLayout:
+            id: weatherImage
+            #:import SvgImage app.frames.utilities.SvgImage
+            SvgImage:
+                size_hint: (1, .9)
+                id: 'image'
+                source: ''
+
+        MonoAdaptiveLabel:
+            size_hint: (1, 1)
+            id: weatherTemperature
+            font_size: self.height/2
+            text: '+666°C'
+
+    MonoAdaptiveLabel:
+
+        size_hint: (1, 0.5)
+        id: weatherStatus
+        text: 'debug'
+'''
+)
 
 class Weather(BoxLayout):
 
@@ -50,9 +82,48 @@ class Weather(BoxLayout):
 
     def __init__(self, *args, **kwargs):
         super().__init__(**kwargs)
+        Clock.schedule_once(self._post_init)
 
-        self.weather_status = ''
-        self.weather_image = ''
+    def _post_init(self, *args):
+        '''
+        image = Image(
+                                size_hint = (1, .9),
+                                id        = 'image',
+                                source    = '')
+        temperature = MonoAdaptiveLabel(
+                                size_hint = (1, 1),
+                                id        = 'weatherTemperature',
+                                font_size = self.height/2,
+                                text      = '+666°C')
+        statusLabel = MonoAdaptiveLabel(
+                                size_hint = (1, 0.5),
+                                id        = 'weatherStatus',
+                                text      = 'debug')
+
+
+        imageBox = BoxLayout()
+        imageBox.add_widget(image)
+
+        iconAndTemp = BoxLayout(
+                                orientation = "horizontal")
+
+        iconAndTemp.add_widget(imageBox)
+        iconAndTemp.add_widget(temperature)
+
+        self.orientation = "vertical"
+        self.add_widget(iconAndTemp)
+        self.add_widget(statusLabel)
+        '''
+
+        '''
+        self.ids.weatherImage.add_widget(Image(
+                                size_hint = (1, .9),
+                                id        = 'image',
+                                source    = ''))
+        '''
+
+        # todo добавить динамический выбор виджета для иконки в зависимости от формата изображения
+
 
         # обновляем погоду на лейблах
         Clock.schedule_once(self.update)
@@ -95,34 +166,7 @@ class Weather(BoxLayout):
 
         hour = int(datetime.datetime.now().strftime('%H'))
 
-        self.ids['weatherImage'].source = self.pick_image_name_from_id(hour, weather_id)
+        #self.ids['image'].source = self.pick_image_name_from_id(hour, weather_id)
         self.ids['weatherTemperature'].text = weather
         self.ids['weatherStatus'].text = weather_description
 
-Builder.load_string('''
-<Weather>:
-    orientation: "vertical"
-
-    BoxLayout:
-        #size_hint: (1, None)
-        orientation: "horizontal"
-
-        BoxLayout:
-            #size_hint: (.2, None)
-            Image:
-                size_hint: (1, .9)
-                id: weatherImage
-                source: "weather_icons/tornado.svg"
-
-        MonoAdaptiveLabel:
-            size_hint: (1, 1)
-            id: weatherTemperature
-            font_size: self.height/2
-            text: '+666°C'
-
-    MonoAdaptiveLabel:
-
-        size_hint: (1, 0.5)
-        id: weatherStatus
-        text: 'debug'
-''')
