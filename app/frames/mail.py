@@ -1,5 +1,5 @@
-from ..frames.utils import BasicWidget
+from kivy.uix.boxlayout import BoxLayout
 
 
-class Mail(BasicWidget):
+class Mail(BoxLayout):
     pass

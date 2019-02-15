@@ -1,10 +1,10 @@
 import datetime
 
-from ..frames.utils import BasicWidget
 from kivy.clock import Clock
+from kivy.uix.boxlayout import BoxLayout
 
 
-class Calendar(BasicWidget):
+class Calendar(BoxLayout):
     def __init__(self, *args, **kwargs):
         super().__init__(**kwargs)
         self.formattedDate = ''

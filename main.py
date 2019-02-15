@@ -1,3 +1,4 @@
+from kivy import Config
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
@@ -5,7 +6,6 @@ from kivy.uix.gridlayout import GridLayout
 
 import cProfile, pstats, io
 
-from app.frames.utils import BasicWidget
 from app.frames.weather import Weather
 from app.frames.calendar import Calendar
 from app.frames.clock import Clock
@@ -25,6 +25,7 @@ class MainApp(App):
         root = self.root
         return Root()
 
+'''
     def on_start(self):
         self.profile = cProfile.Profile()
         self.profile.enable()
@@ -40,7 +41,7 @@ class MainApp(App):
         self.profile.dump_stats('sm.profile')
 
         print("\n\nMEANT TO BE EXECUTED IN PORTRAIT MODE (desktop pc)\n\n")
-
+'''
 
 
 if __name__ == "__main__":
@@ -53,15 +54,20 @@ if __name__ == "__main__":
 
     from kivy.core.window import Window
     # Window.fullscreen = True
-    Window.fullscreen = 'auto'
+    Window.fullscreen = False
+    Config.set('graphics', 'width', '800')
+    Config.set('graphics', 'height', '600')
 
 
+
+    #'''
     from os import listdir
     kv_path = './app/frames/kv/'
     for kv in listdir(kv_path):
         if(kv == "__pycache__"):
             continue
         Builder.load_file(kv_path + kv)
+    #'''
 
     app = MainApp()
     app.run()

@@ -2,12 +2,13 @@ import datetime
 
 import requests
 from kivy.clock import Clock
+from kivy.lang import Builder
+from kivy.uix.boxlayout import BoxLayout
 
-from ..frames.utils import BasicWidget
 from .utils import TimeConstant
 
 
-class Weather(BasicWidget):
+class Weather(BoxLayout):
 
     weather_config = {
         'city': 'Kharkiv',
@@ -16,24 +17,24 @@ class Weather(BasicWidget):
 
     # словарь дневных изображений
     weather_day_images = {
-        'thunderstorm': 'source/weather_icons/Storm.png',
-        'drizzle': 'source/weather_icons/Snow.png',
-        'rain': 'source/weather_icons/Rain.png',
-        'snow': 'source/weather_icons/Snow.png',
-        'atmosphere': 'source/weather_icons/Haze.png',
-        'clear': 'source/weather_icons/Sun.png',
-        'clouds': 'source/weather_icons/PartlySunny.png',
+        'thunderstorm': 'source/weather_icons/Storm.svg',
+        'drizzle': 'source/weather_icons/Snow.svg',
+        'rain': 'source/weather_icons/Rain.svg',
+        'snow': 'source/weather_icons/Snow.svg',
+        'atmosphere': 'source/weather_icons/Haze.svg',
+        'clear': 'source/weather_icons/Sun.svg',
+        'clouds': 'source/weather_icons/PartlySunny.svg',
     }
 
     # словарь ночных изображений
     weather_night_images = {
-        'thunderstorm': 'source/weather_icons/Storm.png',
-        'drizzle': 'source/weather_icons/Snow.png',
-        'rain': 'source/weather_icons/Rain.png',
-        'snow': 'source/weather_icons/Snow.png',
-        'atmosphere': 'source/weather_icons/Haze.png',
-        'clear': 'source/weather_icons/Moon.png',
-        'clouds': 'source/weather_icons/PartlyMoon.png',
+        'thunderstorm': 'source/weather_icons/Storm.svg',
+        'drizzle': 'source/weather_icons/Snow.svg',
+        'rain': 'source/weather_icons/Rain.svg',
+        'snow': 'source/weather_icons/Snow.svg',
+        'atmosphere': 'source/weather_icons/Haze.svg',
+        'clear': 'source/weather_icons/Moon.svg',
+        'clouds': 'source/weather_icons/PartlyMoon.svg',
     }
 
     # словарь соответствия идентификаторов погоды соответствующим картинкам
@@ -65,6 +66,7 @@ class Weather(BasicWidget):
                         return self.weather_day_images[weather_type]
                     else:
                         return self.weather_night_images[weather_type]
+        # return                                              # todo иначе возвращаем картинку ошибки
 
     def update(self, *args):
         # получаем погоду с api.openweathermap.org
@@ -77,7 +79,7 @@ class Weather(BasicWidget):
                                    'APPID': self.weather_config['APPID']})
         except:
             self.ids['weatherImage'].source = self.weather_day_images['clear']
-            self.ids['weatherTemperature'].text = '+666°C'
+            self.ids['weatherTemperature'].text = 'No connection'
             self.ids['weatherStatus'].text = 'No connection'
 
             return
@@ -97,3 +99,30 @@ class Weather(BasicWidget):
         self.ids['weatherTemperature'].text = weather
         self.ids['weatherStatus'].text = weather_description
 
+Builder.load_string('''
+<Weather>:
+    orientation: "vertical"
+
+    BoxLayout:
+        #size_hint: (1, None)
+        orientation: "horizontal"
+
+        BoxLayout:
+            #size_hint: (.2, None)
+            Image:
+                size_hint: (1, .9)
+                id: weatherImage
+                source: "weather_icons/tornado.svg"
+
+        MonoAdaptiveLabel:
+            size_hint: (1, 1)
+            id: weatherTemperature
+            font_size: self.height/2
+            text: '+666°C'
+
+    MonoAdaptiveLabel:
+
+        size_hint: (1, 0.5)
+        id: weatherStatus
+        text: 'debug'
+''')

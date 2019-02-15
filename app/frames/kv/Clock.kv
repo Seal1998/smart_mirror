@@ -1,10 +1,43 @@
 <Clock>:
-    orientation: "vertical"
 
-    MonoAdaptiveLabel:
+    AnchorLayout:
+
         id: clock0
-        text: "--:--"
-        font_size: self.height
-        font_name: "./app/frames/fonts/digital-7/digital-7 (mono).ttf"
+
+        BoxLayout:
+
+        BoxLayout:
+            size_hint_x: .6
+
+            MonoAdaptiveLabel:
+                id: clock0hours
+
+                text: "HH"
+                font_size: self.height
+
+            MonoAdaptiveLabel:
+                id: clock0column1
+
+                text: ":"
+                font_size: self.height
+
+            MonoAdaptiveLabel:
+                id: clock0minutes
+
+                text: "MM"
+                font_size: self.height
+
+            MonoAdaptiveLabel:
+                id: clock0column2
+
+                text: ":"
+                font_size: self.height
 
 
+            MonoAdaptiveLabel:
+                id: clock0seconds
+
+                text: "SS"
+                font_size: self.height
+
+        BoxLayout:

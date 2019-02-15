@@ -1,12 +1,12 @@
 from kivy.clock import Clock
 from kivy.uix.boxlayout import BoxLayout
 
-from ..frames.utils import BasicWidget, Currency
+from ..frames.utils import Currency
 import requests
 from .utils import TimeConstant
 
 
-class ExchangeRates(BasicWidget):
+class ExchangeRates(BoxLayout):
     config = {
         'url': 'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json',
         'currency': ['USD', 'RUB']
@@ -21,22 +21,18 @@ class ExchangeRates(BasicWidget):
 
     def _post_init(self, *args):
         for i in range(0, self.config['currency'].__len__()):
-            self.ids['currencies'].add_widget(Currency(
-                                                        id   = 'currency' + i.__str__()#,
-                                                        #name = self.config['currency'][i]
-            ))
+            new_currency = Currency(id = self.config['currency'][i])
+            self.ids['currencies'].add_widget(new_currency)
+
 
     def update(self, *args):
 
         try:
             for element in requests.get(self.config['url'], ).json():
                 if element['cc'] in self.config['currency']:
-                    pass
-                    #rates_string = ('{}: {:.2f}{}'.format(element['cc'], element['rate'], ' UAH'))
-
-                    for child in self.ids['currencies'].children:
-                        if child.name == element['cc']:
-                            child.children[1].text = ('{}:'.format(element['cc']))
+                    for child in self.ids['currencies'].children:  # in each currency
+                        if child.id == element['cc']:
+                            child.children[1].text = ('{}:'.format(element['cc']))  # set currency acronym
                             child.children[0].text = ('{:.2f}{}'.format(element['rate'], ' UAH'))
         except:
             for i in range(0, self.ids['currencies'].children.__len__()):
