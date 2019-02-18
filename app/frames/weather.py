@@ -40,6 +40,8 @@ Builder.load_string(
 
 class Weather(BoxLayout):
 
+    png = True
+
     weather_config = {
         'city': 'Kharkiv',
         'APPID': 'dbdaef6ff380721afe343cf0543f9e82',
@@ -47,24 +49,24 @@ class Weather(BoxLayout):
 
     # словарь дневных изображений
     weather_day_images = {
-        'thunderstorm': 'source/weather_icons/Storm.svg',
-        'drizzle': 'source/weather_icons/Snow.svg',
-        'rain': 'source/weather_icons/Rain.svg',
-        'snow': 'source/weather_icons/Snow.svg',
-        'atmosphere': 'source/weather_icons/Haze.svg',
-        'clear': 'source/weather_icons/Sun.svg',
-        'clouds': 'source/weather_icons/PartlySunny.svg',
+        'thunderstorm': 'source/weather_icons/Storm.',
+        'drizzle': 'source/weather_icons/Snow.',
+        'rain': 'source/weather_icons/Rain.',
+        'snow': 'source/weather_icons/Snow.',
+        'atmosphere': 'source/weather_icons/Haze.',
+        'clear': 'source/weather_icons/Sun.',
+        'clouds': 'source/weather_icons/PartlySunny.',
     }
 
     # словарь ночных изображений
     weather_night_images = {
-        'thunderstorm': 'source/weather_icons/Storm.svg',
-        'drizzle': 'source/weather_icons/Snow.svg',
-        'rain': 'source/weather_icons/Rain.svg',
-        'snow': 'source/weather_icons/Snow.svg',
-        'atmosphere': 'source/weather_icons/Haze.svg',
-        'clear': 'source/weather_icons/Moon.svg',
-        'clouds': 'source/weather_icons/PartlyMoon.svg',
+        'thunderstorm': 'source/weather_icons/Storm.',
+        'drizzle': 'source/weather_icons/Snow.',
+        'rain': 'source/weather_icons/Rain.',
+        'snow': 'source/weather_icons/Snow.',
+        'atmosphere': 'source/weather_icons/Haze.',
+        'clear': 'source/weather_icons/Moon.',
+        'clouds': 'source/weather_icons/PartlyMoon.',
     }
 
     # словарь соответствия идентификаторов погоды соответствующим картинкам
@@ -113,10 +115,16 @@ class Weather(BoxLayout):
         self.add_widget(statusLabel)
         '''
 
-        self.image = SvgImage(
-                                size_hint = (1, .9),
-                                #id        = 'image',
-                                source    = '')
+        if self.png:
+            self.image = Image(
+                size_hint=(1, .9),
+                # id        = 'image',
+                source='')
+        else:
+            self.image = SvgImage(
+                                    size_hint = (1, .9),
+                                    #id        = 'image',
+                                    source    = '')
         self.ids.image.add_widget(self.image)
 
 
@@ -132,9 +140,18 @@ class Weather(BoxLayout):
             for w_id in self.weather_id[weather_type]:        # Перебираем идентификаторы (id) из погодного типа
                 if w_id == weather_id:                        # Если нашлось совпадение по id, то
                     if hour in range(6, 18):                  # Устанивливаем картику, соответствующую времени суток
-                        return self.weather_day_images[weather_type]
+                        path = self.weather_day_images[weather_type]
+                        if self.png:
+                            path += 'png'
+                        else: path += 'svg'
+                        return path
                     else:
-                        return self.weather_night_images[weather_type]
+                        path = self.weather_night_images[weather_type]
+                        if self.png:
+                            path += 'png'
+                        else:
+                            path += 'svg'
+                        return path
         # return                                              # todo иначе возвращаем картинку ошибки
 
     def update(self, *args):
@@ -147,7 +164,7 @@ class Weather(BoxLayout):
                                    'units': 'metric',
                                    'APPID': self.weather_config['APPID']})
         except:
-            self.ids['weatherImage'].source = self.weather_day_images['clear']
+            self.image.source = self.weather_day_images['clear']
             self.ids['weatherTemperature'].text = 'No connection'
             self.ids['weatherStatus'].text = 'No connection'
 
