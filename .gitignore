@@ -1,5 +1,5 @@
 .idea/
 __pycache__/
-hostapd.conf
-wpa_supplicant.conf
+*.conf
 *.db
+*.profile

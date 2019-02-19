@@ -26,7 +26,6 @@ class ExchangeRates(BoxLayout):
 
 
     def update(self, *args):
-
         try:
             for element in requests.get(self.config['url'], ).json():
                 if element['cc'] in self.config['currency']:
