@@ -10,4 +10,4 @@ Engine = create_engine('sqlite:///{}/{}.db'.format(cur_dir, db_name))
 
 Base = declarative_base()
 
-Session = sessionmaker(bind=Engine)
+Session = sessionmaker(bind=Engine, )

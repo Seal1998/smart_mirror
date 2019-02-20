@@ -8,5 +8,5 @@ class Settings(Base):
     pid = Column(Integer)
 
     follow_exchRates = Column(String)#json string
-    weather_city = Column(String)
+    city = Column(String)
     weather_appid = Column(String)

@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request
 from database.db import db
+from app.manager import manager
 import os, signal, subprocess
 from config import ROOT_DIR
 
@@ -8,6 +9,11 @@ blueprint = Blueprint('settings', __name__, template_folder='templates')
 @blueprint.route('/settings')
 def settings():
     return render_template('settings.html')
+
+@blueprint.route('/test')
+def testfunc():
+    city = db.get_city()
+    return city
 
 @blueprint.route('/setset', methods = ['POST', 'GET'])
 def setset():

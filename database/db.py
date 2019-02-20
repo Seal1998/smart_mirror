@@ -1,10 +1,11 @@
-import os
+import os, json
 
 from database.config import Engine, Base, Session
 from database.models.WifiConfig import WifiConfig
 from database.models.Task import Task
 from database.models.Settings import Settings
 from database.models.Weather import Weather
+from database.models.ExchangeRates import ExchangeRates
 
 class Database():
 
@@ -29,10 +30,20 @@ class Database():
 
 #SETTINGS
 
-    def set_settings(self, follow_exchRates, weather_city, weather_appid):
-        settings = Settings(pid=os.getpid(), follow_exchRates=follow_exchRates, weather_city=weather_city, weather_appid=weather_appid)
-        self.session.add(settings)
-        self.session.commit()
+    def update_settings(self, follow_exchRates, city, weather_appid):
+        settings = self.session.query(Settings).first()
+        if settings is None:
+            settings = Settings(pid=os.getpid(), follow_exchRates=follow_exchRates, city=city, weather_appid=weather_appid)
+            self.session.add(settings)
+            self.session.commit()
+            return True
+        settings.pid = os.getpid()
+        settings.follow_exchRates = '0'
+        settings.city = city
+        settings.weather_appid = '0'
+        db.session.add(settings)
+        db.session.commit()
+
 
 
     def set_pid(self):
@@ -57,21 +68,45 @@ class Database():
         settings = self.session.query(Settings).first()
         return settings.city
 
+#ExchangeRates
+
+    def get_rates(self): #return type - JSON array
+        ex_rates = self.session.query(ExchangeRates).first()
+
+        return json.loads(ex_rates.exchRates)
+
+    def update_rates(self, ex_rates_json_string): #input type - JSON string
+        ex_rates = self.session.query(ExchangeRates).first()
+        if ex_rates is None:
+            ex_rates = ExchangeRates(exchRates=ex_rates_json_string)
+            self.session.add(ex_rates)
+            self.session.commit()
+            return True
+        ex_rates.exchRates = ex_rates_json_string
+        self.session.commit()
+
+#WEATHER
+
     def get_weather_appid(self):
         settings = self.session.query(Settings).first()
         return settings.weather_appid
-
-#WEATHER
 
     def get_weather(self):
         weather = self.session.query(Weather).first()
         return weather.array()
 
-    def update_weather(self, appid):
+    def update_weather(self, weather_temp, weather_description, weather_id):
         weather = self.session.query(Weather).first()
         if weather is None:
-            weather = Weather()
-        weather.parse_weather(self.get_city(), self.get_weather_appid())
+            weather = Weather(city=self.get_city(), weather_temp=weather_temp, weather_description=weather_description, weather_id=weather_id)
+            self.session.add(weather)
+            self.session.commit()
+            return True
+        weather.weather_temp = weather_temp
+        weather.weather_description=weather_description
+        weather.weather_id=weather_id
+        #weather.city=self.get_city()
+        self.session.commit()
 
 
 
