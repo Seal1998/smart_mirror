@@ -1,5 +1,7 @@
 import os, json
 
+from sqlalchemy.orm import scoped_session, sessionmaker
+
 from database.config import Engine, Base, Session
 from database.models.WifiConfig import WifiConfig
 from database.models.Task import Task
@@ -9,7 +11,8 @@ from database.models.ExchangeRates import ExchangeRates
 
 class Database():
 
-    session = Session()
+    session = scoped_session(sessionmaker(bind=Engine))
+
 
     def __init__(self):
         Base.metadata.create_all(Engine)
@@ -59,7 +62,9 @@ class Database():
 
     def get_pid(self):
         settings = self.session.query(Settings).first()
+
         if settings is None:
+            print("settings is none")
             self.set_pid()
             return os.getpid()
         return settings.pid

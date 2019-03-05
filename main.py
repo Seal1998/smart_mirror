@@ -5,6 +5,10 @@ from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 from kivy.uix.gridlayout import GridLayout
 
+from app.manager import manager
+
+manager.set_pid()
+
 import cProfile, pstats, io
 
 from app.frames.weather import Weather

@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request
 from database.db import db
+from database.config import Session
 from app.manager import manager
 import os, signal, subprocess
 from config import ROOT_DIR

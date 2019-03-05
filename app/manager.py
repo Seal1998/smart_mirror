@@ -37,9 +37,11 @@ class Manager():
 
 #SETTINGS
 
-    def update_settings(self):
-        db.update_settings('0', '0', '0')
-        return "OK"
+    def set_pid(self):
+        db.set_pid()
+
+    def get_pid(self):
+        return db.get_pid()
 
 #EXCHANGERATES
 
