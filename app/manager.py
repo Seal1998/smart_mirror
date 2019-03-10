@@ -14,12 +14,12 @@ class Manager():
     exchange_rates_url = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json"
     exchange_rates_currency = ['USD', 'RUB']
 
-    def __init__(self):
-        self.ap = AccessPoint(interface='wlp3s0', ssid=self.ap_SSID, wpa_passphrase=self.ap_PASS)
-        self.wifi = Wifi(interface='wlp3s0')#todo: интерфейс берётся из класса wifi (ifconfig)
-        self.has_internet_connection = self.wifi.check_connection()
-        db.set_pid()
-        print(db.get_pid())
+#    def __init__(self):
+        #self.ap = AccessPoint(interface='wlp3s0', ssid=self.ap_SSID, wpa_passphrase=self.ap_PASS)
+        #self.wifi = Wifi(interface='wlp3s0')#todo: интерфейс берётся из класса wifi (ifconfig)
+        #self.has_internet_connection = self.wifi.check_connection()
+        #db.set_pid()
+        #print(db.get_pid())
 
     def get_connection_status(self):
         self.wifi_ssid, self.wifi_pass = db.get_wifi_config()

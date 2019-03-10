@@ -21,7 +21,7 @@ def setset():
     if request.method == 'POST':
         settings = request.form
         db.set_wifi_config(settings['ssid'], settings['password'])
-        print(db.get_wifi_config())
-        os.kill(int(db.get_pid()), signal.SIGKILL)#todo: в manager
-        subprocess.Popen('python3 {}/main.py'.format(ROOT_DIR), shell=True)
+        #print(db.get_wifi_config())
+        #os.kill(int(db.get_pid()), signal.SIGKILL)#todo: в manager
+        #subprocess.Popen('python3 {}/main.py'.format(ROOT_DIR), shell=True)
         return 'YEP'
