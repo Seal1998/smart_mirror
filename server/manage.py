@@ -1,4 +1,4 @@
-from .core import factory
+from server.core import factory
 
 
 server = factory()
