@@ -4,6 +4,8 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 from kivy.uix.gridlayout import GridLayout
+import os
+os.environ['KIVY_WINDOW'] = 'sdl2'
 
 from app.manager import manager
 

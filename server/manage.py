@@ -3,5 +3,5 @@ from server.core import factory
 
 server = factory()
 
-if __name__ == '__main__':
-    server.run()
+#if __name__ == '__main__':
+#    server.run()
