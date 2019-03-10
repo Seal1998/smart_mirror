@@ -9,5 +9,6 @@ cur_dir = os.path.dirname(os.path.abspath(__file__))
 Engine = create_engine('sqlite:///{}/{}.db'.format(cur_dir, db_name))
 
 Base = declarative_base()
+Base.metadata.create_all(Engine)
 
 Session = sessionmaker(bind=Engine, )
