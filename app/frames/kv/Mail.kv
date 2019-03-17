@@ -1,21 +1,59 @@
+#: import h app.frames.utilities.scrH
+#: import fs app.frames.utilities.FontSize
+
 <Mail>:
     orientation: 'vertical'
 
-    MonoAdaptiveLabel:
-        size_hint: (1, 0.3)
-        text: 'Mail:'
+    AnchorLayout:
+        position_x: 'left'
+        position_y: 'center'
+        size_hint: (None, None)
+        padding: [self.parent.width / 2, 0, 0, 0]
+
+        MonoLabel:
+            font_size: fs.SMALL
+            text: 'New emails:'
+            size_hint: (None, None)
+            size: self.texture_size
 
     BoxLayout:
         orientation: 'vertical'
 
-        MonoAdaptiveLabel:
-            text: 'From: Boss      Subject: U ARE FIRED'
 
-        MonoAdaptiveLabel:
-            text: 'From: Friend    Subject: Bowling?'
+        Message:
 
-        MonoAdaptiveLabel:
-            text: 'From: YouHub    Subject: Account has been created'
+        Message:
 
-        MonoAdaptiveLabel:
-            text: 'From: SPAM      Subject: SPAMSPAMSPAMSPAM'
+        Message:
+
+
+
+
+
+
+<Message>:
+    StackLayout:
+       # minimum_width: self.parent.width - self.parent.width / 5
+       # x: self.parent.x + self.parent.width / 10
+        orientation: 'lr-tb'
+        MonoLabel:
+            font_size: fs.SMALL
+            size_hint: (None, None)
+            size: self.texture_size
+
+            text: "From: Bob"
+
+        MonoLabel:
+            font_size: fs.SMALL
+            size_hint: (None, None)
+            size: self.texture_size
+
+            text: "   "
+
+        MonoLabel:
+            font_size: fs.SMALL
+            size_hint: (None, None)
+            size: self.texture_size
+
+            text: "Lorem ipsum dolor sit amet"
+
