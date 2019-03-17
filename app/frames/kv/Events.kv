@@ -1,4 +1,5 @@
 #: import h app.frames.utilities.scrH
+#: import fs app.frames.utilities.FontSize
 
 <Events>:
     orientation: 'vertical'
@@ -7,9 +8,10 @@
         position_x: 'left'
         position_y: 'center'
         size_hint: (None, None)
-        padding: [self.parent.width / 3, 0, 0, 0]
+        padding: [self.parent.width / 2, 0, 0, 0]
 
         MonoLabel:
+            font_size: fs.SMALL
             text: 'Upcoming events:'
             size_hint: (None, None)
             size: self.texture_size
@@ -39,6 +41,7 @@
         x: self.parent.x + self.parent.width / 10
         orientation: 'lr-tb'
         MonoLabel:
+            font_size: fs.SMALL
             #name: eventtime
             size_hint: (None, None)
             size: self.texture_size
@@ -46,6 +49,7 @@
             text: "XX:XX"
 
         MonoLabel:
+            font_size: fs.SMALL
             #name: spacer
             size_hint: (None, None)
             size: self.texture_size
@@ -53,6 +57,7 @@
             text: "  "
 
         MonoLabel:
+            font_size: fs.SMALL
             #name: event
             size_hint: (None, None)
             size: self.texture_size
