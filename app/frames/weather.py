@@ -20,24 +20,26 @@ Builder.load_string(
         #size_hint: (1, None)
         orientation: "horizontal"
 
-        BoxLayout:
+        AnchorLayout:
+            
             id: image
             
 
         MonoLabel:
-            size_hint: (1, 1)
+            #size_hint: (1, 1)
             id: weatherTemperature
-            font_size: fs.MEDIUM
-            text: '+666°C'
+            font_size: fs.BIG
 
-    MonoLabel:
-        font_size: fs.TINY
-        width: self.parent.width
-        wrap: True
-        font_name: "./app/frames/fonts/LCD_Solid.ttf"
-        size_hint: (None, 0.5)
-        id: weatherStatus
-        text: 'debug'
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'top'
+        
+        MonoLabel:
+            size: self.texture_size
+            font_size: fs.MEDIUM
+            size_hint: (None, None)
+            id: weatherStatus
+            text: 'debug'
 '''
 )
 
@@ -120,12 +122,12 @@ class Weather(BoxLayout):
 
         if self.png:
             self.image = Image(
-                                    size_hint = (1, .9),
+                                    size_hint = (1, .7),
                                     # id      = 'image',
                                     source    = '')
         else:
             self.image = SvgImage(
-                                    size_hint = (1, .9),
+                                    size_hint = (1, .7),
                                     #id       = 'image',
                                     source    = '')
         self.ids['image'].add_widget(self.image)

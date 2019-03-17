@@ -26,6 +26,7 @@ class Root(GridLayout):
 
 
 class MainApp(App):
+
     def build(self):
         self.title = 'SmartMirror'
         root = self.root
@@ -67,8 +68,6 @@ if __name__ == "__main__":
     Config.write()
 
     Window.size = (1366, 768)  # working not all the time, so double check
-
-
 
     from os import listdir
     kv_path = './app/frames/kv/'

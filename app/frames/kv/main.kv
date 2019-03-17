@@ -1,5 +1,8 @@
 #LEAVE HOPE ALL YE WHO ENTER HERE
 
+#: import fs app.frames.utilities.FontSize
+#: import h app.frames.utilities.scrH
+
 <Root>:
     rows: 1
 
@@ -13,7 +16,7 @@
                 orientation: "vertical"
 
                 size_hint: (1, None)
-                height: root.height / 2
+                height: h / 2
 
                 Clock:
                     size_hint: (1, None)
@@ -25,7 +28,7 @@
 
             Events:
                 size_hint: (1, None)
-                height: root.height / 2
+                height: h / 2
 
         StackLayout:
             orientation: 'tb-lr'
@@ -37,6 +40,6 @@
 
             Weather:
                 size_hint: (1, None)
-                height: root.height / 2
+                height: h / 2
 
 

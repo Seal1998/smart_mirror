@@ -6,6 +6,9 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.scatter import Scatter
 
+from kivy import Config
+scrH = (int(int(Config.get('graphics', 'width')) / 16 * 9))
+
 Builder.load_string('''
 <BasicWidget>:
     pass: "pass"
@@ -72,11 +75,15 @@ class TimeConstant:
 
 
 class FontSize:
-    HUGE    = int(Config.get('graphics', 'height')) / 5
+
+    HUGE    = scrH / 5
     BIG     = HUGE / 2
     MEDIUM  = BIG / 2
     SMALL   = MEDIUM / 2
     TINY    = SMALL / 2
+
+
+
 
 
 
