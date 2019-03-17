@@ -1,18 +1,61 @@
+#: import h app.frames.utilities.scrH
+
 <Events>:
     orientation: 'vertical'
 
-    MonoAdaptiveLabel:
-        size_hint: (1, 0.3)
-        text: 'To do:'
+    AnchorLayout:
+        position_x: 'left'
+        position_y: 'center'
+        size_hint: (None, None)
+        padding: [self.parent.width / 3, 0, 0, 0]
+
+        MonoLabel:
+            text: 'Upcoming events:'
+            size_hint: (None, None)
+            size: self.texture_size
 
     BoxLayout:
         orientation: 'vertical'
 
+
+        Event:
+
+        Event:
+
+        Event:
+
+        Event:
+
+        Event:
+
+        Event:
+
+
+
+
+<Event>:
+    StackLayout:
+        minimum_width: self.parent.width - self.parent.width / 5
+        x: self.parent.x + self.parent.width / 10
+        orientation: 'lr-tb'
         MonoLabel:
-            text: 'Bring car back from service'
+            #name: eventtime
+            size_hint: (None, None)
+            size: self.texture_size
+
+            text: "XX:XX"
 
         MonoLabel:
-            text: "Buy gift for wife's bday"
+            #name: spacer
+            size_hint: (None, None)
+            size: self.texture_size
+
+            text: "  "
 
         MonoLabel:
-            text: 'Pub at 18:00'
+            #name: event
+            size_hint: (None, None)
+            size: self.texture_size
+
+            text: "Lorem ipsum dolor sit amet"
+
