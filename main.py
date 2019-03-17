@@ -4,8 +4,6 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 from kivy.uix.gridlayout import GridLayout
-import os
-os.environ['KIVY_WINDOW'] = 'sdl2'
 
 from app.manager import manager
 
@@ -20,6 +18,7 @@ from app.frames.events import Events
 from app.frames.exchangeRates import ExchangeRates
 from app.frames.mail import Mail
 from app.frames.news import News
+from app.frames.WrapLabel import WrapLabel
 
 
 class Root(GridLayout):
@@ -63,8 +62,11 @@ if __name__ == "__main__":
     from kivy.core.window import Window
     # Window.fullscreen = True
     Window.fullscreen = False
-    Config.set('graphics', 'width', '800')
-    Config.set('graphics', 'height', '600')
+    Config.set('graphics', 'width', '1366')
+    Config.set('graphics', 'height', '768')
+    Config.write()
+
+    Window.size = (1366, 768)  # working not all the time, so double check
 
 
 
@@ -77,3 +79,4 @@ if __name__ == "__main__":
 
     app = MainApp()
     app.run()
+

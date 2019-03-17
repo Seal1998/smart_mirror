@@ -31,8 +31,11 @@ Builder.load_string(
             text: '+666°C'
 
     MonoLabel:
-        font_size: fs.MEDIUM
-        size_hint: (1, 0.5)
+        font_size: fs.TINY
+        width: self.parent.width
+        wrap: True
+        font_name: "./app/frames/fonts/LCD_Solid.ttf"
+        size_hint: (None, 0.5)
         id: weatherStatus
         text: 'debug'
 '''
@@ -95,7 +98,7 @@ class Weather(BoxLayout):
                                 id        = 'weatherTemperature',
                                 font_size = self.height/2,
                                 text      = '+666°C')
-        statusLabel = MonoAdaptiveLabel(
+        statusLabel = MonoLabel(
                                 size_hint = (1, 0.5),
                                 id        = 'weatherStatus',
                                 text      = 'debug')
@@ -117,19 +120,15 @@ class Weather(BoxLayout):
 
         if self.png:
             self.image = Image(
-                size_hint=(1, .9),
-                # id        = 'image',
-                source='')
+                                    size_hint = (1, .9),
+                                    # id      = 'image',
+                                    source    = '')
         else:
             self.image = SvgImage(
                                     size_hint = (1, .9),
-                                    #id        = 'image',
+                                    #id       = 'image',
                                     source    = '')
-        self.ids.image.add_widget(self.image)
-
-
-        # todo добавить динамический выбор виджета для иконки в зависимости от формата изображения
-
+        self.ids['image'].add_widget(self.image)
 
         # обновляем погоду на лейблах
         Clock.schedule_once(self.update)

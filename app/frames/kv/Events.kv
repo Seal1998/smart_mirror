@@ -6,19 +6,13 @@
         text: 'To do:'
 
     BoxLayout:
-        orientation: 'horizontal'
+        orientation: 'vertical'
 
-        BoxLayout: # spacer
-            size_hint: (0.1, 1)
+        MonoLabel:
+            text: 'Bring car back from service'
 
-        BoxLayout:
-            orientation: 'vertical'
+        MonoLabel:
+            text: "Buy gift for wife's bday"
 
-            MonoAdaptiveLabel:
-                text: 'Bring car back from service'
-
-            MonoAdaptiveLabel:
-                text: "Buy gift for wife's bday"
-
-            MonoAdaptiveLabel:
-                text: 'Pub at 18:00'
+        MonoLabel:
+            text: 'Pub at 18:00'

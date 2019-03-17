@@ -23,31 +23,10 @@ Builder.load_string('''
     # \DEBUG
 
 <MonoLabel@Label>
-    font_name: "./app/frames/fonts/digital-7/digital-7 (mono).ttf"
+    #size_hint: (None, None)
+    size: self.texture_size
+    font_name: "./app/frames/fonts/secrcode.ttf"
 
-<MonoAdaptiveLabel@MonoLabel>
-
-
-    # _scale: 1. if self.texture_size[0] < self.width else float(self.width) / self.texture_size[0]
-    #margin: 2
-
-	#canvas.before:
-    # DEBUG
-    #    Color:
-    #        rgba: 1, 1, 0, .1
-    #    Rectangle:
-    #        pos: (self.x + self.margin, self.y + self.margin)
-    #        size: (self.width - self.margin*2, self.height - self.margin*2)
-    # \DEBUG
-
-	#	PushMatrix
-	#	Scale:
-	#		origin: self.center
-	#		x: self._scale or 1.
-	#		y: self._scale or 1.
-
-	#canvas.after:
-	#	PopMatrix
 ''')
 
 class SvgImage(Scatter):
@@ -94,10 +73,10 @@ class TimeConstant:
 
 class FontSize:
     HUGE    = int(Config.get('graphics', 'height')) / 5
-    BIG     = int(Config.get('graphics', 'height')) / 10
-    MEDIUM  = int(Config.get('graphics', 'height')) / 20
-    SMALL   = int(Config.get('graphics', 'height')) / 35
-    TINY    = int(Config.get('graphics', 'height')) / 70
+    BIG     = HUGE / 2
+    MEDIUM  = BIG / 2
+    SMALL   = MEDIUM / 2
+    TINY    = SMALL / 2
 
 
 

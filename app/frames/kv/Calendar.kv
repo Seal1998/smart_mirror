@@ -1,9 +1,33 @@
 #: import fs app.frames.utilities.FontSize
 
-<Calendar>:
-    orientation: "vertical"
 
-    MonoLabel:
-        text: "Date"
-        id: date
-        font_size: fs.BIG
+
+<Calendar>:
+    anchor_x: 'left'
+    anchor_y: 'center'
+    padding: [(fs.HUGE - fs.BIG)/3, 0, 0, 0]
+
+    BoxLayout:
+        orientation: "vertical"
+
+        MonoLabel:
+            text: "Date"
+            id: date
+            font_size: fs.BIG
+
+            size_hint: (None, None)
+            size: self.texture_size
+
+        AnchorLayout:
+            anchor_x: 'left'
+            anchor_y: 'top'
+
+            padding: [(fs.BIG - fs.SMALL)/3, 0, 0, 0]
+
+            MonoLabel:
+                text: "weekday"
+                id: weekday
+                font_size: fs.SMALL
+
+                size_hint: (None, None)
+                size: self.texture_size

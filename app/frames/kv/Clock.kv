@@ -4,47 +4,33 @@
     font_size: fs.HUGE
 
 <Clock>:
+    id: clock0
 
-    AnchorLayout:
-
-        id: clock0
-
-        BoxLayout:
-
-        BoxLayout:
-            size_hint_x: .6
-
-            ClockLabel:
-                id: clock0hours
-
-                text: "HH"
-                font_size: self.height
-
-            ClockLabel:
-                id: clock0column1
-
-                text: ":"
-                font_size: self.height
-                opacity: 0.
-
-            ClockLabel:
-                id: clock0minutes
-
-                text: "MM"
-                font_size: self.height
-
-            #ClockLabel:
-            #    id: clock0column2
-
-            #    text: ":"
-            #    font_size: self.height
-            #    opacity: 0.
+    BoxLayout:
+        ClockLabel:
+            id: clock0hours
+            text: "HH"
 
 
-            #ClockLabel:
-            #    id: clock0seconds
+        ClockLabel:
+            id: clock0column1
 
-            #    text: "SS"
-            #    font_size: self.height
+            text: ":"
+            opacity: 0.
 
-        BoxLayout:
+        ClockLabel:
+            id: clock0minutes
+
+            text: "MM"
+
+        #ClockLabel:
+        #    id: clock0column2
+
+        #    text: ":"
+        #    opacity: 0.
+
+
+        #ClockLabel:
+        #    id: clock0seconds
+
+        #    text: "SS"
